@@ -42,3 +42,4 @@
 .booth-page .composition-sticker{max-width:50%}
 .composition-sticker>.sticker-remove-handle{right:-8px;top:-8px;bottom:auto;left:auto}.composition-sticker>.sticker-resize-handle{right:-9px;top:auto;bottom:-9px;left:auto}
 .brand-logo{display:block;width:174px;max-height:54px;object-fit:contain}.brand{padding:0}.brand:hover .brand-logo{opacity:.88}@media(max-width:620px){.brand-logo{width:138px;max-height:45px}}
+.fake-photo>img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
