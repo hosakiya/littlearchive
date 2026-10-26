@@ -162,3 +162,18 @@ img,video,canvas{max-width:100%}
   .booth-page .design-options{grid-template-columns:minmax(0,1fr)}
   .booth-page .image-stickers{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
+.privacy-page{max-width:1000px;margin-inline:auto}
+.privacy-document{max-width:780px;margin:0 auto;padding:clamp(22px,5vw,54px);background:#fffdf9;border:1px solid #eadfd7;box-shadow:0 16px 48px #6653480c;color:#56443f;line-height:1.8}
+.privacy-document h1{margin:8px 0 6px;font:500 clamp(42px,7vw,68px)/1.04 'Cormorant Garamond',Georgia,serif;letter-spacing:-.045em}
+.privacy-document h1 em{color:#b96f7c;font-style:italic}
+.privacy-document .privacy-updated{margin:0 0 26px;color:#a1847c;font-size:13px}
+.privacy-document h2{margin:30px 0 8px;color:#76575a;font:600 23px/1.25 'Cormorant Garamond',Georgia,serif}
+.privacy-document p{margin:12px 0}
+.privacy-document ul{padding-left:24px;margin:8px 0 16px}
+.privacy-document li{padding-left:4px;margin:7px 0}
+.privacy-back{display:inline-block;margin-top:24px}
+.night-mode .privacy-document{background:#2b2731;border-color:#514550;color:#eee5e5}
+.night-mode .privacy-document h2{color:#e9c3cc}
+.night-mode .privacy-document h1 em{color:#e6a5b4}
+.night-mode .privacy-document .privacy-updated{color:#c5aeb7}
+@media(max-width:600px){.privacy-page{padding:26px 4%}.privacy-document{padding:23px 19px;line-height:1.72}.privacy-document h1{font-size:clamp(40px,12vw,58px)}.privacy-document h2{font-size:21px;margin-top:25px}.privacy-document ul{padding-left:20px}}
