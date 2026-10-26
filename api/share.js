@@ -1,4 +1,4 @@
-import { createHmac, randomUUID, timingSafeEqual } from 'node:crypto';
+import { randomUUID } from 'node:crypto';
 import { get, put } from '@vercel/blob';
 
 const MAX_IMAGE_BYTES = 2.5 * 1024 * 1024;
@@ -11,21 +11,6 @@ function respond(res, status, body) {
   res.end(JSON.stringify(body));
 }
 
-function signingSecret() {
-  return process.env.QR_SHARE_SECRET || process.env.BLOB_READ_WRITE_TOKEN || '';
-}
-
-function signatureFor(pathname, expires) {
-  return createHmac('sha256', signingSecret()).update(`${pathname}:${expires}`).digest('hex');
-}
-
-function validSignature(expected, provided) {
-  if (!/^[a-f0-9]{64}$/i.test(provided || '')) return false;
-  const left = Buffer.from(expected, 'hex');
-  const right = Buffer.from(provided, 'hex');
-  return left.length === right.length && timingSafeEqual(left, right);
-}
-
 function validateSameOrigin(req) {
   const origin = req.headers.origin;
   if (!origin) return true;
@@ -36,8 +21,7 @@ function validateSameOrigin(req) {
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     if (!validateSameOrigin(req)) return respond(res, 403, { error: 'Please create the QR from the Little Archive site.' });
-    if (!process.env.BLOB_READ_WRITE_TOKEN) return respond(res, 503, { error: 'QR downloads need a Vercel Blob store. Connect one to this project and redeploy.' });
-    if (!signingSecret()) return respond(res, 503, { error: 'QR download signing is not configured.' });
+    if (!process.env.BLOB_STORE_ID && !process.env.BLOB_READ_WRITE_TOKEN) return respond(res, 503, { error: 'QR downloads need a Vercel Blob store connected to this project. Redeploy after connecting it.' });
     try {
       const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
       const match = /^data:image\/(jpeg|png);base64,([A-Za-z0-9+/=]+)$/.exec(body?.dataUrl || '');
@@ -59,7 +43,6 @@ export default async function handler(req, res) {
       const downloadUrl = new URL('/api/share', `${protocol}://${host}`);
       downloadUrl.searchParams.set('file', pathname);
       downloadUrl.searchParams.set('expires', String(expires));
-      downloadUrl.searchParams.set('signature', signatureFor(pathname, expires));
       return respond(res, 200, { url: downloadUrl.toString(), expiresAt: new Date(expires).toISOString() });
     } catch (error) {
       console.error('QR share upload failed:', error);
@@ -71,14 +54,11 @@ export default async function handler(req, res) {
     const url = new URL(req.url, `https://${req.headers.host}`);
     const pathname = url.searchParams.get('file') || '';
     const expires = Number(url.searchParams.get('expires'));
-    const signature = url.searchParams.get('signature') || '';
-    if (!/^little-archive\/qr\/\d+-[\da-f-]{36}\.(?:jpg|png)$/.test(pathname) || !Number.isFinite(expires)) {
+    const pathMatch = /^little-archive\/qr\/(\d+)-[\da-f-]{36}\.(?:jpg|png)$/.exec(pathname);
+    if (!pathMatch || !Number.isFinite(expires) || Number(pathMatch[1]) !== expires) {
       return res.status(400).send('This photo link is invalid.');
     }
     if (expires <= Date.now()) return res.status(410).send('This photo link has expired.');
-    if (!signingSecret() || !validSignature(signatureFor(pathname, expires), signature)) {
-      return res.status(403).send('This photo link is invalid.');
-    }
     try {
       const result = await get(pathname, { access: 'private' });
       if (!result || result.statusCode !== 200 || !result.stream) return res.status(404).send('This photo could not be found.');
