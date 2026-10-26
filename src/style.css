@@ -177,3 +177,6 @@ img,video,canvas{max-width:100%}
 .night-mode .privacy-document h1 em{color:#e6a5b4}
 .night-mode .privacy-document .privacy-updated{color:#c5aeb7}
 @media(max-width:600px){.privacy-page{padding:26px 4%}.privacy-document{padding:23px 19px;line-height:1.72}.privacy-document h1{font-size:clamp(40px,12vw,58px)}.privacy-document h2{font-size:21px;margin-top:25px}.privacy-document ul{padding-left:20px}}
+@media(min-width:821px){.topbar nav{flex:1;justify-content:center;align-items:center;gap:clamp(20px,4vw,54px)}.topbar nav button{white-space:nowrap}}
+.privacy-document a{color:#a65f70;text-decoration-color:#d6a1aa;text-underline-offset:3px}
+.night-mode .privacy-document a{color:#f0b7c6}
