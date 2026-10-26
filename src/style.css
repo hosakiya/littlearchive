@@ -180,3 +180,18 @@ img,video,canvas{max-width:100%}
 @media(min-width:821px){.topbar nav{flex:1;justify-content:center;align-items:center;gap:clamp(20px,4vw,54px)}.topbar nav button{white-space:nowrap}}
 .privacy-document a{color:#a65f70;text-decoration-color:#d6a1aa;text-underline-offset:3px}
 .night-mode .privacy-document a{color:#f0b7c6}
+.archive-loader{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:24px;background:#f8f5efeF;backdrop-filter:blur(8px);animation:loader-fade-in .25s ease both}
+.loader-card{display:flex;flex-direction:column;align-items:center;text-align:center;animation:loader-card-enter .6s cubic-bezier(.2,.75,.25,1) both}
+.loader-card>img{width:min(220px,55vw);height:auto;max-height:72px;object-fit:contain;margin-bottom:24px;animation:loader-logo-breathe 1.8s ease-in-out infinite}
+.loader-polaroid{width:80px;height:94px;padding:8px 8px 23px;background:#fffdf8;box-shadow:0 10px 25px #725d542b;transform:rotate(-7deg);animation:loader-print 1.6s ease-in-out infinite}
+.loader-polaroid span{height:100%;display:grid;place-items:center;background:linear-gradient(145deg,#f5dce3,#e5e6df 52%,#d9e9ef);color:#bd7d88;font:28px Georgia,serif}
+.loader-card p{margin:23px 0 12px;color:#9c777b;font:italic 13px 'Homemade Apple',cursive}
+.loader-progress{width:142px;height:3px;overflow:hidden;background:#eadbd6;border-radius:9px}
+.loader-progress i{display:block;width:45%;height:100%;border-radius:inherit;background:#c6818e;animation:loader-progress 1.1s ease-in-out infinite alternate}
+.night-mode .archive-loader{background:#211f27ef}.night-mode .loader-polaroid{background:#36303b}.night-mode .loader-card p{color:#e6b9c3}.night-mode .loader-progress{background:#514550}
+@keyframes loader-fade-in{from{opacity:0}to{opacity:1}}
+@keyframes loader-card-enter{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes loader-logo-breathe{50%{transform:scale(1.035);opacity:.82}}
+@keyframes loader-print{0%,100%{transform:translateY(0) rotate(-7deg)}50%{transform:translateY(-8px) rotate(3deg)}}
+@keyframes loader-progress{from{transform:translateX(-15%)}to{transform:translateX(145%)}}
+@media(prefers-reduced-motion:reduce){.loader-card,.loader-card>img,.loader-polaroid,.loader-progress i{animation:none!important}}
