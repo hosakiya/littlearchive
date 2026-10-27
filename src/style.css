@@ -320,3 +320,9 @@ img,video,canvas{max-width:100%}
 .night-mode .sticker-category-toggle{color:#efe4e5}
 .night-mode .sticker-category-toggle small{color:#c1aeb4}
 @media(max-width:620px){.sticker-category .image-stickers{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.composition-sticker>.sticker-rotate-handle,.composition-sticker>.sticker-flip-handle{position:absolute;z-index:3;display:none;width:21px;height:21px;padding:0;border:2px solid #fff8f3;border-radius:50%;background:#b96f7c;color:#fff;font:14px/17px Arial,sans-serif;text-align:center;box-shadow:0 1px 4px #40322c55;cursor:pointer;touch-action:manipulation}
+.composition-sticker.is-selected>.sticker-rotate-handle,.composition-sticker.is-selected>.sticker-flip-handle{display:grid;place-items:center}
+.composition-sticker>.sticker-rotate-handle{left:-9px;top:-9px}
+.composition-sticker>.sticker-flip-handle{left:-9px;bottom:-9px}
+.composition-sticker>.sticker-rotate-handle:focus-visible,.composition-sticker>.sticker-flip-handle:focus-visible{outline:2px solid #775e57;outline-offset:2px}
+.night-mode .composition-sticker>.sticker-rotate-handle,.night-mode .composition-sticker>.sticker-flip-handle{border-color:#2b2731;background:#d18494;color:#241d24}
