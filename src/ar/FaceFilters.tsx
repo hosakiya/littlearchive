@@ -5,14 +5,17 @@ import type { CaptureSettings, FaceFilterCanvasHandle, FaceFilterDefinition, Fac
 
 export const faceFilters: FaceFilterDefinition[] = [
   { id: 'none', name: 'No AR', description: 'keep the camera natural' },
-  { id: 'puppy', name: 'Puppy ears', description: 'soft floppy ears', asset: '/ar-filters/puppy-ears.svg' },
-  { id: 'cat', name: 'Cat ears', description: 'pointed ears and whiskers', asset: '/ar-filters/cat-ears.svg' },
+  { id: 'cat', name: 'Cat ears', description: 'soft pink cat ears', asset: '/ar-filters/cat-ears.png' },
+  { id: 'dog-ears', name: 'Floppy dog ears', description: 'warm floppy ears', asset: '/ar-filters/dog-ears.png' },
+  { id: 'bunny-ears', name: 'Bunny ears', description: 'soft white bunny ears', asset: '/ar-filters/bunny-ears.png' },
+  { id: 'hair-clips', name: 'Flower hairclips', description: 'pink clips with little flowers', asset: '/ar-filters/hair-clips.png' },
+  { id: 'pink-bow', name: 'Pink bow', description: 'a bow tucked into your hair', asset: '/ar-filters/pink-bow.png' },
   { id: 'devil-horns', name: 'Devil horns', description: 'sketched red horns', asset: '/ar-filters/devil-horns.png' },
   { id: 'star-glasses', name: 'Star glasses', description: 'round glasses with a star', asset: '/ar-filters/star-glasses.png' },
   { id: 'heart-halo', name: 'Heart halo', description: 'a little arc of floating hearts', asset: '/ar-filters/heart-halo.png' },
   { id: 'halo', name: 'Halo', description: 'a soft glowing halo above your head', asset: '/ar-filters/halo.png' },
   { id: 'paw-blush', name: 'Paw blush', description: 'pink cheek accents with soft stripes', asset: '/ar-filters/pink-paw-blush.png' },
-  { id: 'bubbles', name: 'Magic bubbles', description: 'raise or wiggle your fingers to release bubbles', asset: '/ar-filters/bubble-halo.png' },
+  { id: 'bubbles', name: 'Magic bubbles', description: 'raise or wiggle your fingers to release bubbles', asset: '/ar-filters/clear-bubble.png' },
 ];
 
 const WASM_ROOT = 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@1.1.1/wasm';
@@ -57,18 +60,21 @@ function paintFilter(ctx: CanvasRenderingContext2D, points: NormalizedLandmark[]
   const image = images[filter];
   if (!image?.complete || !image.naturalWidth || !faceWidth) return;
 
-  const placements: Record<Exclude<FaceFilterId, 'none' | 'bubbles'>, { width: number; height: number; y: number }> = {
-    puppy: { width: faceWidth * 1.55, height: faceWidth * .82, y: -faceWidth * .53 },
+  const placements: Record<Exclude<FaceFilterId, 'none' | 'bubbles'>, { width: number; height: number; x?: number; y: number }> = {
+    'dog-ears': { width: faceWidth * 1.55, height: faceWidth * .82, y: -faceWidth * .53 },
     cat: { width: faceWidth * 1.36, height: faceWidth * .65, y: -faceWidth * .73 },
+    'bunny-ears': { width: faceWidth * 1.42, height: faceWidth * 1.06, y: -faceWidth * .85 },
+    'hair-clips': { width: faceWidth * .62, height: faceWidth * .57, x: -faceWidth * .42, y: -faceWidth * .25 },
+    'pink-bow': { width: faceWidth * .7, height: faceWidth * .43, x: -faceWidth * .42, y: -faceWidth * .30 },
     'devil-horns': { width: faceWidth * 1.34, height: faceWidth * .60, y: -faceWidth * .73 },
     'star-glasses': { width: faceWidth * 1.22, height: faceWidth * .52, y: faceWidth * .01 },
     'heart-halo': { width: faceWidth * 1.35, height: faceWidth * .54, y: -faceWidth * 1.02 },
     halo: { width: faceWidth * .92, height: faceWidth * .34, y: -faceWidth * .86 },
     'paw-blush': { width: faceWidth * 1.35, height: faceWidth * .36, y: faceWidth * .29 },
   };
-  const { width: drawWidth, height: drawHeight, y } = placements[filter];
+  const { width: drawWidth, height: drawHeight, x = 0, y } = placements[filter];
   ctx.save();
-  ctx.translate(eyeMid.x, eyeMid.y);
+  ctx.translate(eyeMid.x + x, eyeMid.y);
   ctx.rotate(angle);
   ctx.drawImage(image, -drawWidth / 2, y - drawHeight / 2, drawWidth, drawHeight);
   if (filter === 'cat') {
