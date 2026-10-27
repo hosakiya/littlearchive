@@ -21,6 +21,7 @@
 .selected-style .layout-demo{height:58px;width:min(47px,calc(58px * var(--print-ratio)));padding:0;gap:0}
 .selected-style .layout-demo-photo{border-width:1px!important}
 .slotted-layout{overflow:hidden;width:min(100%,560px)!important;padding:0!important;margin:0 auto 14px!important;background:var(--paper)!important;box-shadow:0 12px 30px #4c3e3a25!important;transform:none!important;animation:none!important;position:relative}
+.slotted-brand,.template-brand{position:absolute;z-index:3;top:.7%;left:0;width:100%;color:#6f504d;text-align:center;font:600 clamp(7px,1.2vw,11px)/1.2 Georgia,serif;letter-spacing:.04em;pointer-events:none;text-shadow:0 1px 3px #fffdf8b8}
 .slotted-layout.layout-strip3,.slotted-layout.layout-strip4{width:min(100%,235px)!important}
 .slotted-layout.layout-grid6,.slotted-layout.layout-portrait1{width:min(100%,320px)!important}
 .slotted-layout.layout-landscape1,.slotted-layout.layout-triple3,.slotted-layout.layout-collage3a,.slotted-layout.layout-collage3b,.slotted-layout.layout-grid4,.slotted-layout.layout-pair2,.slotted-layout.layout-pair2stack{width:min(100%,560px)!important}
