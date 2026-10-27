@@ -63,13 +63,13 @@ function paintFilter(ctx: CanvasRenderingContext2D, points: NormalizedLandmark[]
   const placements: Record<Exclude<FaceFilterId, 'none' | 'bubbles'>, { width: number; height: number; x?: number; y: number }> = {
     'dog-ears': { width: faceWidth * 1.55, height: faceWidth * .82, y: -faceWidth * .53 },
     cat: { width: faceWidth * 1.36, height: faceWidth * .65, y: -faceWidth * .73 },
-    'bunny-ears': { width: faceWidth * 1.42, height: faceWidth * 1.06, y: -faceWidth * .85 },
-    'hair-clips': { width: faceWidth * .62, height: faceWidth * .57, x: -faceWidth * .42, y: -faceWidth * .25 },
-    'pink-bow': { width: faceWidth * .7, height: faceWidth * .43, x: -faceWidth * .42, y: -faceWidth * .30 },
+    'bunny-ears': { width: faceWidth * 1.42, height: faceWidth * 1.06, y: -faceWidth * 1.02 },
+    'hair-clips': { width: faceWidth * .62, height: faceWidth * .57, x: -faceWidth * .52, y: -faceWidth * .25 },
+    'pink-bow': { width: faceWidth * .7, height: faceWidth * .43, x: faceWidth * .42, y: -faceWidth * .48 },
     'devil-horns': { width: faceWidth * 1.34, height: faceWidth * .60, y: -faceWidth * .73 },
     'star-glasses': { width: faceWidth * 1.22, height: faceWidth * .52, y: faceWidth * .01 },
     'heart-halo': { width: faceWidth * 1.35, height: faceWidth * .54, y: -faceWidth * 1.02 },
-    halo: { width: faceWidth * .92, height: faceWidth * .34, y: -faceWidth * .86 },
+    halo: { width: faceWidth * 1.10, height: faceWidth * .41, y: -faceWidth * .90 },
     'paw-blush': { width: faceWidth * 1.35, height: faceWidth * .36, y: faceWidth * .29 },
   };
   const { width: drawWidth, height: drawHeight, x = 0, y } = placements[filter];
