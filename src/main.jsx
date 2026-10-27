@@ -22,7 +22,7 @@ const themes = [
 ];
 const layouts = [
   {id:'strip3',name:'2×6 · 3 photos',note:'three frames in a classic narrow strip',count:3,printWidth:560,printHeight:1680,slots:[[.1,.035,.8,.29],[.1,.355,.8,.29],[.1,.675,.8,.29]]},
-  {id:'strip4',name:'2×6 · 4 photos',note:'four frames in a classic narrow strip',count:4,printWidth:560,printHeight:1680,slots:[[.1,.035,.8,.205],[.1,.275,.8,.205],[.1,.515,.8,.205],[.1,.755,.8,.205]]},
+  {id:'strip4',name:'2×6 · 4 photos',note:'four frames with a little extra footer space',count:4,printWidth:560,printHeight:1680,slots:[[.1,.035,.8,.19],[.1,.26,.8,.19],[.1,.485,.8,.19],[.1,.71,.8,.19]]},
   {id:'grid6',name:'4×6 · 6 photos',note:'six frames in a two-column grid',count:6,printWidth:1120,printHeight:1680,slots:[[.055,.04,.42,.29],[.525,.04,.42,.29],[.055,.355,.42,.29],[.525,.355,.42,.29],[.055,.67,.42,.29],[.525,.67,.42,.29]]},
   {id:'portrait1',name:'4×6 · Portrait',note:'one full portrait photo',count:1,printWidth:1120,printHeight:1680,slots:[[.055,.04,.89,.92]]},
   {id:'landscape1',name:'4×6 · Landscape',note:'one full landscape photo',count:1,printWidth:1680,printHeight:1120,slots:[[.04,.06,.92,.88]]},
