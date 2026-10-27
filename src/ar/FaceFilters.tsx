@@ -7,9 +7,10 @@ export const faceFilters: FaceFilterDefinition[] = [
   { id: 'none', name: 'No AR', description: 'keep the camera natural' },
   { id: 'puppy', name: 'Puppy ears', description: 'soft floppy ears', asset: '/ar-filters/puppy-ears.svg' },
   { id: 'cat', name: 'Cat ears', description: 'pointed ears and whiskers', asset: '/ar-filters/cat-ears.svg' },
-  { id: 'red-cat-ears', name: 'Red cat ears', description: 'sketched red ears', asset: '/ar-filters/red-cat-ears.png' },
+  { id: 'devil-horns', name: 'Devil horns', description: 'sketched red horns', asset: '/ar-filters/devil-horns.png' },
   { id: 'star-glasses', name: 'Star glasses', description: 'round glasses with a star', asset: '/ar-filters/star-glasses.png' },
   { id: 'heart-halo', name: 'Heart halo', description: 'a little arc of floating hearts', asset: '/ar-filters/heart-halo.png' },
+  { id: 'halo', name: 'Halo', description: 'a soft glowing halo above your head', asset: '/ar-filters/halo.png' },
   { id: 'paw-blush', name: 'Paw blush', description: 'pink cheek accents with soft stripes', asset: '/ar-filters/pink-paw-blush.png' },
   { id: 'bubbles', name: 'Magic bubbles', description: 'raise or wiggle your fingers to release bubbles', asset: '/ar-filters/bubble-halo.png' },
 ];
@@ -17,7 +18,7 @@ export const faceFilters: FaceFilterDefinition[] = [
 const WASM_ROOT = 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@1.1.1/wasm';
 const FACE_MODEL = 'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task';
 const HAND_MODEL = 'https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task';
-const BUBBLE_ASSETS = ['/ar-filters/bubble-halo.png', '/ar-filters/clear-bubble.png', '/ar-filters/pink-bubble.png'] as const;
+const BUBBLE_ASSETS = ['/ar-filters/clear-bubble.png', '/ar-filters/pink-bubble.png'] as const;
 const assetUrls = Object.fromEntries(faceFilters.flatMap(({ id, asset }) => asset ? [[id, asset]] : [])) as Partial<Record<FaceFilterId, string>>;
 const landmark = (points: NormalizedLandmark[], index: number, width: number, height: number) => ({ x: points[index].x * width, y: points[index].y * height });
 
@@ -59,9 +60,10 @@ function paintFilter(ctx: CanvasRenderingContext2D, points: NormalizedLandmark[]
   const placements: Record<Exclude<FaceFilterId, 'none' | 'bubbles'>, { width: number; height: number; y: number }> = {
     puppy: { width: faceWidth * 1.55, height: faceWidth * .82, y: -faceWidth * .53 },
     cat: { width: faceWidth * 1.36, height: faceWidth * .65, y: -faceWidth * .73 },
-    'red-cat-ears': { width: faceWidth * 1.34, height: faceWidth * .60, y: -faceWidth * .73 },
+    'devil-horns': { width: faceWidth * 1.34, height: faceWidth * .60, y: -faceWidth * .73 },
     'star-glasses': { width: faceWidth * 1.22, height: faceWidth * .52, y: faceWidth * .01 },
     'heart-halo': { width: faceWidth * 1.35, height: faceWidth * .54, y: -faceWidth * 1.02 },
+    halo: { width: faceWidth * .92, height: faceWidth * .34, y: -faceWidth * .86 },
     'paw-blush': { width: faceWidth * 1.35, height: faceWidth * .36, y: faceWidth * .29 },
   };
   const { width: drawWidth, height: drawHeight, y } = placements[filter];
