@@ -110,6 +110,7 @@ interface BubbleParticle {
   age: number;
   life: number;
   rotation: number;
+  driftPhase: number;
   asset: (typeof BUBBLE_ASSETS)[number];
 }
 
@@ -125,21 +126,22 @@ function createBubbleBurst(particles: BubbleParticle[], x: number, y: number, am
   for (let index = 0; index < amount; index++) {
     const asset = BUBBLE_ASSETS[Math.floor(Math.random() * BUBBLE_ASSETS.length)];
     particles.push({
-      x: x + (Math.random() - .5) * .025,
-      y: y + (Math.random() - .5) * .02,
-      vx: (Math.random() - .5) * .10,
-      vy: -.045 - Math.random() * .12,
-      size: .035 + Math.random() * .045,
+      x: x + (Math.random() - .5) * .012,
+      y: y + (Math.random() - .5) * .012,
+      vx: (Math.random() - .5) * .028,
+      vy: -.025 - Math.random() * .035,
+      size: .025 + Math.random() * .027,
       age: 0,
-      life: 1.1 + Math.random() * .8,
-      rotation: (Math.random() - .5) * .45,
+      life: 2.4 + Math.random() * 1.2,
+      rotation: (Math.random() - .5) * .18,
+      driftPhase: Math.random() * Math.PI * 2,
       asset,
     });
   }
-  if (particles.length > 70) particles.splice(0, particles.length - 70);
+  if (particles.length > 38) particles.splice(0, particles.length - 38);
 }
 
-function detectRaisedFingers(hands: NormalizedLandmark[][], previousPositions: Map<string, { x: number; y: number }>, lastEmittedAt: Map<string, number>, particles: BubbleParticle[], now: number) {
+function detectRaisedFingers(hands: NormalizedLandmark[][], previousPositions: Map<string, { x: number; y: number }>, lastEmittedAt: Map<string, number>, particles: BubbleParticle[], lastGlobalEmission: { value: number }, now: number) {
   const seen = new Set<string>();
   hands.forEach((hand, handIndex) => {
     const wrist = hand[0];
@@ -158,11 +160,12 @@ function detectRaisedFingers(hands: NormalizedLandmark[][], previousPositions: M
       const movement = previous ? Math.hypot(tip.x - previous.x, tip.y - previous.y) : 0;
       previousPositions.set(key, { x: tip.x, y: tip.y });
       const lastEmission = lastEmittedAt.get(key) ?? 0;
-      const moving = movement > .012;
-      if (moving || now - lastEmission > 180) {
-        const numberOfBubbles = moving ? Math.min(5, Math.max(2, 1 + Math.floor(movement / .018))) : 1;
+      const moving = movement > .024;
+      if ((moving || now - lastEmission > 650) && now - lastEmission > 320 && now - lastGlobalEmission.value > 110) {
+        const numberOfBubbles = moving && movement > .055 ? 2 : 1;
         createBubbleBurst(particles, tip.x, tip.y, numberOfBubbles);
         lastEmittedAt.set(key, now);
+        lastGlobalEmission.value = now;
       }
     });
   });
@@ -177,7 +180,8 @@ function updateBubbles(particles: BubbleParticle[], previousTime: { value: numbe
     particle.age += delta;
     particle.x += particle.vx * delta;
     particle.y += particle.vy * delta;
-    particle.vy -= .012 * delta;
+    particle.vx *= Math.exp(-1.15 * delta);
+    particle.vy += .004 * delta;
   }
   for (let i = particles.length - 1; i >= 0; i--) if (particles[i].age >= particles[i].life) particles.splice(i, 1);
 }
@@ -187,13 +191,14 @@ function drawBubbles(ctx: CanvasRenderingContext2D, particles: BubbleParticle[],
     const image = images[particle.asset];
     if (!image?.complete || !image.naturalWidth) return;
     const progress = particle.age / particle.life;
-    const scale = Math.min(1, particle.age * 9) * (1 - progress * .18);
+    const scale = Math.min(1, particle.age * 3.5) * (1 - progress * .12);
     const drawWidth = particle.size * width * scale;
     const drawHeight = drawWidth * image.naturalHeight / image.naturalWidth;
-    const opacity = Math.min(1, particle.age * 8, (1 - progress) * 2.3);
+    const opacity = Math.min(.86, particle.age * 3.2, (1 - progress) * 1.5);
     ctx.save();
     ctx.globalAlpha = opacity;
-    ctx.translate(particle.x * width, particle.y * height);
+    const drift = Math.sin(particle.age * 2.2 + particle.driftPhase) * width * .004;
+    ctx.translate(particle.x * width + drift, particle.y * height);
     ctx.rotate(particle.rotation);
     ctx.drawImage(image, -drawWidth / 2, -drawHeight / 2, drawWidth, drawHeight);
     ctx.restore();
@@ -218,6 +223,7 @@ export const FaceFilterCanvas = forwardRef<FaceFilterCanvasHandle, FaceFilterCan
   const bubblesRef = useRef<BubbleParticle[]>([]);
   const previousFingerPositionsRef = useRef(new Map<string, { x: number; y: number }>());
   const lastFingerEmissionRef = useRef(new Map<string, number>());
+  const lastBubbleEmissionRef = useRef({ value: 0 });
   const bubbleClockRef = useRef({ value: performance.now() });
   const statusCallbackRef = useRef(onStatus);
   filterRef.current = selectedFilter;
@@ -236,7 +242,7 @@ export const FaceFilterCanvas = forwardRef<FaceFilterCanvasHandle, FaceFilterCan
         if (filterRef.current === 'bubbles' && handModelRef.current) {
           try {
             const hands = handModelRef.current.detectForVideo(video, performance.now());
-            detectRaisedFingers(hands.landmarks, previousFingerPositionsRef.current, lastFingerEmissionRef.current, bubblesRef.current, performance.now());
+            detectRaisedFingers(hands.landmarks, previousFingerPositionsRef.current, lastFingerEmissionRef.current, bubblesRef.current, lastBubbleEmissionRef.current, performance.now());
           } catch {
             // The last bubble particles still render if a hand-tracking frame is skipped.
           }
@@ -370,7 +376,7 @@ export const FaceFilterCanvas = forwardRef<FaceFilterCanvasHandle, FaceFilterCan
               if (!handLandmarker) void loadHandTracker();
               else {
                 const hands = handLandmarker.detectForVideo(video, now);
-                detectRaisedFingers(hands.landmarks, previousFingerPositionsRef.current, lastFingerEmissionRef.current, bubblesRef.current, now);
+                detectRaisedFingers(hands.landmarks, previousFingerPositionsRef.current, lastFingerEmissionRef.current, bubblesRef.current, lastBubbleEmissionRef.current, now);
               }
             }
             const result = landmarker.detectForVideo(video, now);
@@ -408,6 +414,7 @@ export const FaceFilterCanvas = forwardRef<FaceFilterCanvasHandle, FaceFilterCan
       bubblesRef.current = [];
       previousFingerPositionsRef.current.clear();
       lastFingerEmissionRef.current.clear();
+      lastBubbleEmissionRef.current.value = 0;
       context.clearRect(0, 0, canvas.width, canvas.height);
     };
   }, [active, video]);
