@@ -180,6 +180,32 @@ img,video,canvas{max-width:100%}
 @media(min-width:821px){.topbar nav{flex:1;justify-content:center;align-items:center;gap:clamp(20px,4vw,54px)}.topbar nav button{white-space:nowrap}}
 .privacy-document a{color:#a65f70;text-decoration-color:#d6a1aa;text-underline-offset:3px}
 .night-mode .privacy-document a{color:#f0b7c6}
+.site-icon-email,.site-icon-website{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.about-page{max-width:1040px;margin-inline:auto;display:grid;place-items:center;min-height:calc(100vh - 210px)}
+.about-card{position:relative;isolation:isolate;overflow:hidden;width:min(100%,780px);padding:clamp(32px,7vw,76px);background:#fffdf9;border:1px solid #eadfd7;box-shadow:0 18px 52px #66534810;color:#56443f}
+.about-card:before{position:absolute;z-index:-1;content:"";width:270px;height:270px;right:-120px;top:-140px;border-radius:50%;background:#f6e3e7;filter:blur(2px)}
+.about-card>.eyebrow{margin:0 0 16px}
+.about-card h1{max-width:620px;margin:0 0 25px;font:500 clamp(43px,7vw,72px)/1.02 'Cormorant Garamond',Georgia,serif;letter-spacing:-.04em;color:#493a36}
+.about-card h1 em{color:#bd7d88;font-style:normal}
+.about-story{max-width:620px;margin:0;color:#806d66;font-size:clamp(14px,1.6vw,16px);line-height:2}
+.about-heart{display:inline-block;color:#bd7d88;white-space:nowrap}
+.about-contact{margin-top:34px;padding-top:23px;border-top:1px solid #eadfd7}
+.about-contact>p{margin:0 0 14px;color:#977f78;font:10px 'DM Mono',monospace;letter-spacing:.6px}
+.about-contact a{display:flex;width:max-content;max-width:100%;align-items:center;gap:11px;padding:8px 0;color:#795d5b;text-decoration:none;transition:color .2s,transform .2s}
+.about-contact a:hover{color:#b96f7c;transform:translateX(3px)}
+.about-contact a .site-icon{width:17px;height:17px;color:#b96f7c;flex:none}
+.about-sparkle{position:absolute;color:#d58f9d;pointer-events:none}
+.about-sparkle-one{right:12%;top:15%;font-size:25px}
+.about-sparkle-two{right:8%;top:48%;font-size:14px;color:#d8b48a}
+.night-mode .about-card{background:#2b2731;border-color:#514550;color:#eee5e5}
+.night-mode .about-card:before{background:#523746}
+.night-mode .about-card h1{color:#f1e8e7}
+.night-mode .about-story{color:#cbb9be}
+.night-mode .about-contact{border-color:#514550}
+.night-mode .about-contact>p{color:#c5aeb7}
+.night-mode .about-contact a{color:#ead9de}
+.night-mode .about-sparkle{color:#e6a5b4}
+@media(max-width:600px){.about-page{padding:34px 5%;min-height:calc(100vh - 230px)}.about-card{padding:32px 24px}.about-card h1{font-size:clamp(40px,11vw,58px)}.about-story{font-size:14px;line-height:1.85}.about-sparkle-one{right:10%;top:8%;font-size:18px}.about-sparkle-two{right:7%;top:37%;font-size:12px}}
 .archive-loader{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:24px;background:#f8f5efeF;backdrop-filter:blur(8px);animation:loader-fade-in .25s ease both}
 .loader-card{display:flex;flex-direction:column;align-items:center;text-align:center;animation:loader-card-enter .6s cubic-bezier(.2,.75,.25,1) both}
 .loader-card>img{width:min(220px,55vw);height:auto;max-height:72px;object-fit:contain;margin-bottom:24px;animation:loader-logo-breathe 1.8s ease-in-out infinite}
