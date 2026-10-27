@@ -34,11 +34,11 @@ const layouts = [
   {id:'pair2stack',name:'4×6 · 2-photo stack',note:'two wide frames, one above the other',count:2,printWidth:1680,printHeight:1120,slots:[[.035,.06,.93,.42],[.035,.54,.93,.4]]}
 ];
 const stripDesigns=[
-  {id:'classic',name:'Classic frame',note:'bold white borders',frame:'#fffdf8',border:.045},
-  {id:'scrapbook',name:'Scrapbook',note:'blush paper edges',frame:'#f8e8e6',border:.05},
-  {id:'film',name:'Film negative',note:'dark analog frames',frame:'#302c32',border:.05},
-  {id:'coquette',name:'Lace note',note:'soft rose & delicate edges',frame:'#fff8f6',border:.045},
-  {id:'editorial',name:'Clean edit',note:'quiet, minimal borders',frame:'#ffffff',border:.025},
+  {id:'classic',name:'Classic frame',note:'slim white borders',frame:'#fffdf8',border:.022},
+  {id:'scrapbook',name:'Scrapbook',note:'soft blush paper edges',frame:'#f8e8e6',border:.025},
+  {id:'film',name:'Film negative',note:'dark analog frames',frame:'#302c32',border:.025},
+  {id:'coquette',name:'Lace note',note:'soft rose & delicate edges',frame:'#fff8f6',border:.022},
+  {id:'editorial',name:'Clean edit',note:'quiet, minimal borders',frame:'#ffffff',border:.014},
   {id:'puppy-picnic',name:'Puppy Picnic',note:'pastel pups, hearts & four cuts',template:{src:'/templates/strip-1.png',slots:[[77,151,418,246,'round'],[79,464,417,238,'round'],[74,761,418,241,'round'],[77,1051,417,244,'round']]}},
   {id:'denim-days',name:'Denim Days',note:'blue jean film with four cuts',template:{src:'/templates/strip-2.png',slots:[[103,167,354,223,'rect'],[103,485,354,222,'rect'],[103,803,354,220,'rect'],[103,1122,354,220,'rect']]}},
   {id:'nice-day',name:'Have a Nice Day',note:'sunny gingham with four cuts',template:{src:'/templates/strip-3.png',slots:[[74,208,418,237,'round'],[74,484,418,241,'round'],[74,756,418,243,'round'],[74,1030,418,244,'round']]}},
