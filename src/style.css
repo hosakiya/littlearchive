@@ -210,3 +210,25 @@ img,video,canvas{max-width:100%}
 .strip-top b .site-icon{width:13px;height:13px}
 .capture>span .site-icon{width:17px;height:17px}
 .footer-icon{width:16px;height:16px}
+.camera-frame .countdown,.camera-frame .flash{animation:none}
+.ar-filter-canvas{position:absolute;z-index:1;inset:0;display:block;width:100%;height:100%;object-fit:cover;transform:scaleX(-1);pointer-events:none}
+.camera-overlay,.countdown,.flash,.camera-error{z-index:2}
+.ar-filter-control{width:100%;max-width:680px;margin:13px auto 0;padding:14px 16px;background:#f3eee7;border:1px solid #e7ddd4}
+.ar-filter-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:11px}
+.ar-filter-heading>label{font:9px 'DM Mono',monospace;letter-spacing:1px;color:#a1847c}
+.ar-tracking-status{display:flex;align-items:center;gap:6px;color:#9a8580;font-size:9px;text-align:right}
+.ar-tracking-status i{width:7px;height:7px;flex:0 0 7px;border-radius:50%;background:#c6b6ae}
+.ar-tracking-status.is-ready i{background:#75a985;box-shadow:0 0 0 3px #75a98524}
+.ar-tracking-status.is-error i,.ar-tracking-status.is-unsupported i{background:#c88183}
+.ar-filter-list{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.ar-filter-list button{display:flex;min-width:0;flex-direction:column;align-items:center;gap:6px;padding:8px 5px;border:1px solid #e6d9d0;background:#fffaf5;color:#806b65;font-size:9px;line-height:1.2}
+.ar-filter-list button.active{border-color:#bf7785;background:#f7e6e9;color:#694a50;box-shadow:0 3px 10px #9e66721a}
+.ar-filter-swatch{display:grid;width:44px;height:36px;place-items:center;overflow:hidden;border-radius:18px 18px 12px 12px;background:linear-gradient(145deg,#e9f3f1,#e9dce3 58%,#e6cabc)}
+.ar-filter-swatch img{display:block;width:100%;height:100%;object-fit:contain}
+.filter-none-mark{width:20px;height:1px;background:#927b75;transform:rotate(-35deg)}
+.night-mode .ar-filter-control{background:#2b2731;border-color:#514550}
+.night-mode .ar-filter-heading>label,.night-mode .ar-tracking-status{color:#c5aeb7}
+.night-mode .ar-filter-list button{background:#36303b;border-color:#514550;color:#eee4e5}
+.night-mode .ar-filter-list button.active{background:#67434f;border-color:#cc8998;color:#fff}
+@media(max-width:600px){.ar-filter-control{padding:12px 9px}.ar-filter-list{gap:5px}.ar-filter-list button{padding:7px 3px;font-size:8px}.ar-filter-swatch{width:38px;height:32px}.ar-filter-heading{align-items:flex-start;flex-direction:column}.ar-tracking-status{text-align:left}}
+@media(max-width:380px){.ar-filter-list{grid-template-columns:repeat(3,minmax(0,1fr))}.ar-filter-heading{gap:5px}}

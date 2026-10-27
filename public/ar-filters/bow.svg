@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 210">
+  <defs><linearGradient id="bow" x2="0" y2="1"><stop stop-color="#ffd1dc"/><stop offset="1" stop-color="#dc8398"/></linearGradient></defs>
+  <path d="M163 91C95 17 22 14 28 72c4 44 76 82 137 63ZM177 91c68-74 141-77 135-19-4 44-76 82-137 63Z" fill="url(#bow)" stroke="#ae6378" stroke-width="9" stroke-linejoin="round"/>
+  <path d="m157 113-51 79 73-43 12-38Zm26 0 51 79-73-43-12-38Z" fill="#e799aa" stroke="#ae6378" stroke-width="8" stroke-linejoin="round"/><ellipse cx="170" cy="103" rx="30" ry="27" fill="#f7c4d0" stroke="#ae6378" stroke-width="8"/>
+</svg>
