@@ -206,6 +206,26 @@ img,video,canvas{max-width:100%}
 .night-mode .about-contact a{color:#ead9de}
 .night-mode .about-sparkle{color:#e6a5b4}
 @media(max-width:600px){.about-page{padding:34px 5%;min-height:calc(100vh - 230px)}.about-card{padding:32px 24px}.about-card h1{font-size:clamp(40px,11vw,58px)}.about-story{font-size:14px;line-height:1.85}.about-sparkle-one{right:10%;top:8%;font-size:18px}.about-sparkle-two{right:7%;top:37%;font-size:12px}}
+.memory-expiry-note{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 auto 34px;color:#9a817a;font:11px 'DM Mono',monospace;letter-spacing:.2px}
+.memory-expiry-note .site-icon{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;color:#bd7d88}
+.memory-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:20px;max-width:1120px;margin:0 auto}
+.memory-card{position:relative;min-width:0;padding:14px;background:#f3eee7;border:1px solid #e9ded6;text-align:left;box-shadow:0 8px 24px #51423b0c}
+.memory-expiry-badge{position:absolute;z-index:2;top:20px;right:20px;padding:6px 8px;background:#fffdf4eF;border:1px solid #eadfd7;color:#a56c73;font:8px 'DM Mono',monospace;letter-spacing:.2px}
+.memory-view{display:block;position:relative;width:100%;height:260px;padding:0;overflow:hidden;border:0;background:#e9e0d9}
+.memory-view img{width:100%;height:100%;object-fit:contain;transition:transform .25s}
+.memory-view:hover img{transform:scale(1.025)}
+.memory-view>span{position:absolute;inset:auto 0 0;padding:18px 10px 10px;background:linear-gradient(transparent,#2f2529a8);color:#fff;text-align:left;font:9px 'DM Mono',monospace;letter-spacing:.6px;opacity:0;transition:opacity .2s}
+.memory-view:hover>span,.memory-view:focus-visible>span{opacity:1}
+.memory-card-meta{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 2px 2px;color:#725c57;font-size:10px}
+.memory-card-meta>span{min-width:0;overflow-wrap:anywhere}
+.memory-card-meta small{display:block;margin-top:5px;color:#a28b83;font:8px 'DM Mono',monospace}
+.memory-delete{flex:none;border:1px solid #e5d5d0;background:#fffaf5;padding:6px 9px;color:#a45f6c;font-size:9px}
+.memory-modal{position:fixed;z-index:30;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:15px;padding:34px;background:#201b20ed;backdrop-filter:blur(7px)}
+.memory-modal>img{max-width:min(90vw,880px);max-height:78vh;object-fit:contain;box-shadow:0 12px 40px #0005}
+.memory-modal>a{color:#fff;background:#a96373;padding:10px 16px;font-size:11px;text-decoration:none}
+.memory-modal-close{position:absolute;top:18px;right:22px;border:1px solid #ffffff77;border-radius:50%;width:38px;height:38px;background:#ffffff18;color:white;font-size:24px;line-height:1}
+.night-mode .memory-expiry-note{color:#c5aeb7}.night-mode .memory-card{background:#2b2731;border-color:#514550}.night-mode .memory-card-meta{color:#eee4e5}.night-mode .memory-card-meta small{color:#c5aeb7}.night-mode .memory-delete{background:#36303b;border-color:#514550;color:#f0b7c6}.night-mode .memory-expiry-badge{background:#2b2731eF;border-color:#514550;color:#f0b7c6}
+@media(max-width:600px){.memory-expiry-note{align-items:flex-start;text-align:left;line-height:1.6}.memory-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.memory-card{padding:8px}.memory-view{height:190px}.memory-expiry-badge{top:13px;right:13px;padding:5px;font-size:7px}.memory-card-meta{align-items:flex-start;font-size:9px}.memory-card-meta small{font-size:7px}.memory-delete{padding:5px 7px}}
 .archive-loader{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:24px;background:#f8f5efeF;backdrop-filter:blur(8px);animation:loader-fade-in .25s ease both}
 .loader-card{display:flex;flex-direction:column;align-items:center;text-align:center;animation:loader-card-enter .6s cubic-bezier(.2,.75,.25,1) both}
 .loader-card>img{width:min(220px,55vw);height:auto;max-height:72px;object-fit:contain;margin-bottom:24px;animation:loader-logo-breathe 1.8s ease-in-out infinite}
