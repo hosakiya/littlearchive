@@ -298,3 +298,25 @@ img,video,canvas{max-width:100%}
 .night-mode .ar-filter-list button.active{background:#67434f;border-color:#cc8998;color:#fff}
 @media(max-width:600px){.ar-filter-control{padding:12px 9px}.ar-filter-list{gap:5px}.ar-filter-list button{padding:7px 3px;font-size:8px}.ar-filter-swatch{width:38px;height:32px}.ar-filter-heading{align-items:flex-start;flex-direction:column}.ar-tracking-status{text-align:left}}
 @media(max-width:380px){.ar-filter-list{grid-template-columns:repeat(3,minmax(0,1fr))}.ar-filter-heading{gap:5px}}
+/* Compact color choices and expandable sticker archive groups. */
+.booth-page .color-swatches{max-width:360px;grid-template-columns:repeat(5,minmax(0,48px));justify-content:start;margin:0;gap:7px}
+.booth-page .color-swatches button{width:42px;max-width:100%}
+@media(max-width:760px){.booth-page .color-swatches{grid-template-columns:repeat(5,minmax(0,38px));gap:6px}.booth-page .color-swatches button{width:34px}}
+.cloud-preview-shot{position:absolute;padding:0!important;overflow:visible;filter:drop-shadow(0 1px 2px #493a3620)}
+.cloud-preview-shot svg{display:block;width:100%;height:100%;overflow:visible}
+.design-option-preview.design-cloud{padding:0;background:transparent;box-shadow:none;display:grid;place-items:center}
+.design-option-preview .cloud-design-preview{width:29px;height:27px;background:var(--frame-color);clip-path:path('M 5 24 C 1 24 0 20 2 17 C 0 13 2 10 6 10 C 6 5 11 4 14 7 C 16 1 23 2 24 7 C 29 5 33 9 31 13 C 36 14 36 20 32 22 C 33 25 29 27 25 25 Z');filter:drop-shadow(0 1px 1px #c6b5ae)}
+.sticker-category-list{display:grid;gap:6px}
+.sticker-category{border:1px solid #e5d9d1;background:#fffaf5}
+.sticker-category-toggle{display:flex;width:100%;align-items:center;gap:10px;padding:10px 12px;border:0;background:transparent;text-align:left;color:#765c59}
+.sticker-category-toggle>span:first-child{font:13px Gloock,serif}
+.sticker-category-toggle small{margin-left:auto;color:#9a8580;font-size:9px}
+.category-chevron{display:inline-block;color:#b96f7c;font-size:17px;line-height:1;transition:transform .18s}
+.category-chevron.is-open{transform:rotate(180deg)}
+.sticker-category .image-stickers{padding:0 10px 10px;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
+.sticker-category .image-stickers button{height:46px;min-width:0;padding:4px;overflow:hidden}
+.sticker-category .image-stickers img{display:block;width:100%;height:100%;max-height:34px;object-fit:contain}
+.night-mode .sticker-category{background:#36303b;border-color:#514550}
+.night-mode .sticker-category-toggle{color:#efe4e5}
+.night-mode .sticker-category-toggle small{color:#c1aeb4}
+@media(max-width:620px){.sticker-category .image-stickers{grid-template-columns:repeat(4,minmax(0,1fr))}}
