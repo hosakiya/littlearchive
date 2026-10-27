@@ -1,6 +1,6 @@
 import type { NormalizedLandmark } from '@mediapipe/tasks-vision';
 
-export type FaceFilterId = 'none' | 'puppy' | 'cat' | 'heart-glasses' | 'bow';
+export type FaceFilterId = 'none' | 'puppy' | 'cat' | 'heart-glasses' | 'bow' | 'heart-halo' | 'paw-blush';
 export type FaceTrackingState = 'idle' | 'loading' | 'ready' | 'no-face' | 'unsupported' | 'error';
 export type CameraPermissionState = 'idle' | 'requesting' | 'ready' | 'denied' | 'unavailable' | 'error';
 

@@ -9,6 +9,8 @@ export const faceFilters: FaceFilterDefinition[] = [
   { id: 'cat', name: 'Cat ears', description: 'pointed ears and whiskers', asset: '/ar-filters/cat-ears.svg' },
   { id: 'heart-glasses', name: 'Heart glasses', description: 'blush tinted frames', asset: '/ar-filters/heart-glasses.svg' },
   { id: 'bow', name: 'Pink bow', description: 'a little ribbon above your hair', asset: '/ar-filters/bow.svg' },
+  { id: 'heart-halo', name: 'Heart halo', description: 'a little arc of floating hearts', asset: '/ar-filters/heart-halo.png' },
+  { id: 'paw-blush', name: 'Paw blush', description: 'pink cheek accents with soft stripes', asset: '/ar-filters/pink-paw-blush.png' },
 ];
 
 const WASM_ROOT = 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@1.1.1/wasm';
@@ -56,6 +58,8 @@ function paintFilter(ctx: CanvasRenderingContext2D, points: NormalizedLandmark[]
     cat: { width: faceWidth * 1.36, height: faceWidth * .65, y: -faceWidth * .73 },
     'heart-glasses': { width: faceWidth * 1.24, height: faceWidth * .47, y: faceWidth * .015 },
     bow: { width: faceWidth * .74, height: faceWidth * .47, y: -faceWidth * .82 },
+    'heart-halo': { width: faceWidth * 1.35, height: faceWidth * .54, y: -faceWidth * 1.02 },
+    'paw-blush': { width: faceWidth * 1.35, height: faceWidth * .36, y: faceWidth * .29 },
   };
   const { width: drawWidth, height: drawHeight, y } = placements[filter];
   ctx.save();
