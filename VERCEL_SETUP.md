@@ -12,3 +12,7 @@ The Vercel QR endpoint stores finished strips in a **private Vercel Blob store**
 QR download URLs contain a random, unguessable file identifier and expire after 24 hours. The photo is stored in a private Blob store and streamed through the app’s Vercel Function.
 
 The local Vite server keeps its same-Wi-Fi QR behavior; cross-device QR links are handled by the Vercel functions in production.
+
+## Shared photo booths
+
+Create and join booths use the same private Blob store. The app stores a six-character invite code, camera-ready status, and compressed booth photos there so two browsers can synchronize a session. Invite codes expire after three hours, and the daily cleanup job removes expired booth data along with expired QR downloads. No additional environment variables are needed beyond the connected Blob store and `CRON_SECRET` above.

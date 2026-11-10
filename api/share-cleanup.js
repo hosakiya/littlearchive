@@ -1,4 +1,4 @@
-import { del, list } from '@vercel/blob';
+import { del, get, list } from '@vercel/blob';
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -23,9 +23,25 @@ export default async function handler(req, res) {
       cursor = page.hasMore ? page.cursor : undefined;
     } while (cursor);
     if (expired.length) await del(expired, { access: 'private' });
-    return res.status(200).json({ deleted: expired.length });
+    const boothBlobs = [];
+    cursor = undefined;
+    do {
+      const page = await list({ prefix: 'little-archive/booths/', limit: 1000, cursor, access: 'private' });
+      boothBlobs.push(...page.blobs);
+      cursor = page.hasMore ? page.cursor : undefined;
+    } while (cursor);
+    const expiredBoothPrefixes = [];
+    for (const blob of boothBlobs.filter(item => /\/room\.json$/.test(item.pathname))) {
+      const stored = await get(blob.pathname, { access: 'private', useCache: false });
+      if (!stored || stored.statusCode !== 200 || !stored.stream) continue;
+      const room = JSON.parse(await new Response(stored.stream).text());
+      if (Number(room.expiresAt) <= Date.now()) expiredBoothPrefixes.push(blob.pathname.replace(/room\.json$/, ''));
+    }
+    const expiredBoothBlobs = boothBlobs.filter(blob => expiredBoothPrefixes.some(prefix => blob.pathname.startsWith(prefix))).map(blob => blob.pathname);
+    if (expiredBoothBlobs.length) await del(expiredBoothBlobs, { access: 'private' });
+    return res.status(200).json({ deleted: expired.length, deletedBooths: expiredBoothPrefixes.length });
   } catch (error) {
-    console.error('Expired QR cleanup failed:', error);
-    return res.status(500).json({ error: 'Could not clean expired photo shares.' });
+    console.error('Expired private storage cleanup failed:', error);
+    return res.status(500).json({ error: 'Could not clean expired private shares.' });
   }
 }
