@@ -141,11 +141,11 @@ export default async function handler(req, res) {
         const code = Array.from(bytes, byte => CODE_ALPHABET[byte % CODE_ALPHABET.length]).join('');
         const now = Date.now();
         const room = { code, layoutId, hostId: participantId, captureDelay: 3, createdAt: now, expiresAt: now + ROOM_LIFETIME_MS, sessionId: null, sessionStartedAt: null };
+        const host = { id: participantId, name: String(body.name || 'Host').slice(0, 24), photos: [], ready: false, left: false, lastSeenAt: now };
         try {
-          await writeJson(roomPath(code), room, false);
-          const host = { id: participantId, name: String(body.name || 'Host').slice(0, 24), photos: [], ready: false, left: false, lastSeenAt: now };
-          await writeJson(personPath(code, 'host'), host, false);
           await Promise.all([
+            writeJson(roomPath(code), room, false),
+            writeJson(personPath(code, 'host'), host, false),
             writeJson(signalPath(code, 'host'), { description: null, candidates: [], updatedAt: now }, false),
             writeJson(signalPath(code, 'guest'), { description: null, candidates: [], updatedAt: now }, false),
           ]);
