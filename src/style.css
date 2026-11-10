@@ -400,8 +400,21 @@ body{background-color:#eee7dd;background-image:radial-gradient(#9b7a6510 .7px,tr
 .room-footnote>span{flex:none;color:#aa8177;font:8px 'DM Mono',monospace;letter-spacing:.8px}
 .room-footnote p{margin:0;color:#99857b;font-size:10px;line-height:1.6}
 .room-back{display:block;margin:24px auto 0}
-.room-active-card{display:flex;justify-content:space-between;align-items:center;gap:18px;max-width:1050px;margin:0 auto 27px;padding:17px 21px;background:#fffdf8;border:1px solid #e4d7c8;box-shadow:3px 4px 0 #dfd0bf;position:relative}
+.room-active-card{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(210px,.8fr);align-items:stretch;gap:18px;max-width:1050px;margin:0 auto 27px;padding:17px 21px;background:#fffdf8;border:1px solid #e4d7c8;box-shadow:3px 4px 0 #dfd0bf;position:relative}
 .room-active-card:before{position:absolute;top:-7px;left:32px;width:60px;height:14px;content:"";background:#dfc9a77a;transform:rotate(-3deg)}
+.room-live-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;min-width:0}
+.room-live-feed{position:relative;aspect-ratio:4/3;min-width:0;margin:0;overflow:hidden;background:#e7ddd1;border:6px solid #fffdf8;box-shadow:0 0 0 1px #ddcdbb,2px 3px 0 #d9c8b7}
+.room-live-feed video,.room-remote-placeholder{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#d8c9bd}
+.room-remote-placeholder{display:grid;place-items:center;padding:10px;background:repeating-linear-gradient(135deg,#eee7dd 0 10px,#e8dfd5 10px 20px);text-align:center}
+.room-remote-placeholder span{max-width:22ch;color:#806c63;font:italic 13px Gloock,serif;line-height:1.5}
+.room-live-feed figcaption{position:absolute;z-index:2;right:6px;bottom:6px;left:6px;display:flex;justify-content:space-between;align-items:center;gap:5px;padding:6px 8px;background:#fffdf0e8;color:#584844;font:italic 12px Gloock,serif}
+.room-live-feed figcaption small{font:7px 'DM Mono',monospace;letter-spacing:.3px;color:#927a70;text-transform:uppercase}
+.room-active-details{display:flex;flex-direction:column;justify-content:center;gap:15px;min-width:0;padding:5px 2px}
+.night-mode .room-live-feed{background:#302a31;border-color:#38313a;box-shadow:0 0 0 1px #675763,2px 3px 0 #28232b}
+.night-mode .room-remote-placeholder{background:repeating-linear-gradient(135deg,#38313a 0 10px,#302a31 10px 20px)}
+.night-mode .room-remote-placeholder span{color:#e0cbd2}
+.night-mode .room-live-feed figcaption{background:#27232be8;color:#f0e4e5}
+.night-mode .room-live-feed figcaption small{color:#c2aab3}
 .room-active-label{display:block;margin-bottom:4px;color:#a1847c;font:8px 'DM Mono',monospace;letter-spacing:1px}
 .room-active-copy strong{font:25px 'DM Mono',monospace;letter-spacing:4px;color:#694f52}
 .room-active-copy p{margin:5px 0 0;color:#947e74;font-size:10px}
@@ -411,6 +424,8 @@ body{background-color:#eee7dd;background-image:radial-gradient(#9b7a6510 .7px,tr
 .shared-waiting-message{align-items:center;gap:12px;background:#2b2524f0}
 .shared-waiting-message strong{font:22px Hillos,sans-serif;color:#fff}
 .shared-waiting-message span{max-width:32ch;color:#f3dfe2;font-size:12px;line-height:1.7}
+.shared-camera-stage{position:absolute;inset:0;display:grid;place-items:center;padding:24px;background:repeating-linear-gradient(135deg,#f1eae1 0 12px,#ece3d9 12px 24px);color:#806a62;font:italic 17px Gloock,serif;text-align:center}
+.night-mode .shared-camera-stage{background:repeating-linear-gradient(135deg,#36303a 0 12px,#302a34 12px 24px);color:#e3cbd3}
 .night-mode .room-book,.night-mode .room-tabs button.active,.night-mode .room-active-card{background:#2b2731;border-color:#514550;color:#f0e4e5}
 .night-mode .room-page-heading h1,.night-mode .room-instructions h2,.night-mode .room-join-panel h2{color:#f1e8e7}
 .night-mode .room-tabs{background:#25222a;border-color:#514550}
@@ -451,7 +466,13 @@ body{background-color:#eee7dd;background-image:radial-gradient(#9b7a6510 .7px,tr
   .room-footnote{width:calc(100% - 28px);align-items:flex-start;gap:10px;padding-top:13px}
   .room-footnote p{font-size:9px}
   .room-error{width:calc(100% - 28px)}
-  .room-active-card{align-items:flex-start;flex-direction:column;padding:15px 14px;gap:13px;margin-bottom:20px}
+  .room-active-card{grid-template-columns:1fr;align-items:stretch;padding:15px 12px;gap:14px;margin-bottom:20px}
+  .room-live-pair{gap:8px}
+  .room-live-feed{border-width:4px;box-shadow:0 0 0 1px #ddcdbb,1px 2px 0 #d9c8b7}
+  .room-live-feed figcaption{left:3px;right:3px;bottom:3px;display:block;padding:5px 6px;font-size:10px;line-height:1.3}
+  .room-live-feed figcaption small{display:block;margin-top:2px;font-size:6px}
+  .room-remote-placeholder span{font-size:10px}
+  .room-active-details{gap:10px;padding:0}
   .room-active-actions{width:100%;justify-content:stretch}
   .room-active-actions button{flex:1;min-width:0;padding:10px 7px;font-size:9px}
   .booth-page .shared-waiting-message{padding:20px;gap:8px}

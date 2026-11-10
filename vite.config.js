@@ -41,14 +41,14 @@ function localPhotoShares() {
             if (!/^[\da-f-]{36}$/i.test(id)) throw new Error('This booth could not identify your device. Please try again.');
             return id;
           };
-          const stateFor = room => ({ room: { code: room.code, layoutId: room.layoutId, captureDelay: room.captureDelay ?? 3, sessionId: room.sessionId, sessionStartedAt: room.sessionStartedAt, createdAt: room.createdAt, expiresAt: room.expiresAt }, host: room.host, guest: room.guest, version: `${room.sessionId || ''}:${room.host?.lastSeenAt || 0}:${room.host?.ready ? 1 : 0}:${room.host?.left ? 1 : 0}:${room.host?.photos?.length || 0}:${room.guest?.lastSeenAt || 0}:${room.guest?.ready ? 1 : 0}:${room.guest?.left ? 1 : 0}:${room.guest?.photos?.length || 0}` });
+          const stateFor = room => ({ room: { code: room.code, layoutId: room.layoutId, captureDelay: room.captureDelay ?? 3, sessionId: room.sessionId, sessionStartedAt: room.sessionStartedAt, createdAt: room.createdAt, expiresAt: room.expiresAt }, host: room.host, guest: room.guest, hostSignal: room.hostSignal || null, guestSignal: room.guestSignal || null, version: `${room.sessionId || ''}:${room.host?.lastSeenAt || 0}:${room.host?.ready ? 1 : 0}:${room.host?.left ? 1 : 0}:${room.host?.photos?.length || 0}:${room.guest?.lastSeenAt || 0}:${room.guest?.ready ? 1 : 0}:${room.guest?.left ? 1 : 0}:${room.guest?.photos?.length || 0}:${room.hostSignal?.updatedAt || 0}:${room.guestSignal?.updatedAt || 0}` });
           if (body.action === 'create') {
             const participantId = validateId(body.participantId);
             if (!/^(strip3|strip4|grid6|portrait1|landscape1|triple3|collage3a|collage3b|grid4|pair2|pair2stack)$/.test(body.layoutId || '')) throw new Error('Choose a photo format before creating your booth.');
             let code;
             do { code = Array.from(randomBytes(6), byte => alphabet[byte % alphabet.length]).join(''); } while (boothRooms.has(code));
             const now = Date.now();
-            const room = { code, layoutId: body.layoutId, captureDelay: 3, createdAt: now, expiresAt: now + 3 * 60 * 60 * 1000, sessionId: null, sessionStartedAt: null, host: { id: participantId, name: String(body.name || 'Host').slice(0, 24), photos: [], ready: false, left: false, lastSeenAt: now }, guest: null };
+            const room = { code, layoutId: body.layoutId, captureDelay: 3, createdAt: now, expiresAt: now + 3 * 60 * 60 * 1000, sessionId: null, sessionStartedAt: null, hostSignal: null, guestSignal: null, host: { id: participantId, name: String(body.name || 'Host').slice(0, 24), photos: [], ready: false, left: false, lastSeenAt: now }, guest: null };
             boothRooms.set(code, room);
             return send(200, stateFor(room));
           }
@@ -65,6 +65,24 @@ function localPhotoShares() {
           const participantId = validateId(body.participantId);
           const role = room.host.id === participantId ? 'host' : room.guest?.id === participantId ? 'guest' : null;
           if (!role) return send(403, { error: 'This device is not connected to that booth. Check the code and join again.' });
+          if (body.action === 'signal') {
+            const key = role === 'host' ? 'hostSignal' : 'guestSignal';
+            const current = room[key] || { description: null, candidates: [], updatedAt: 0 };
+            const next = { ...current, candidates: [...(current.candidates || [])] };
+            if (body.description) {
+              const expectedType = role === 'host' ? 'offer' : 'answer';
+              if (body.description.type !== expectedType || typeof body.description.sdp !== 'string' || body.description.sdp.length > 20000) throw new Error('The live camera connection could not be prepared.');
+              next.description = { type: expectedType, sdp: body.description.sdp };
+            }
+            if (body.candidate) {
+              const candidate = body.candidate;
+              if (typeof candidate.candidate !== 'string' || candidate.candidate.length > 4000 || next.candidates.length >= 64) throw new Error('The live camera connection sent an invalid network route.');
+              if (!next.candidates.some(item => item.candidate === candidate.candidate)) next.candidates.push({ candidate: candidate.candidate, sdpMid: typeof candidate.sdpMid === 'string' ? candidate.sdpMid : null, sdpMLineIndex: Number.isInteger(candidate.sdpMLineIndex) ? candidate.sdpMLineIndex : null, usernameFragment: typeof candidate.usernameFragment === 'string' ? candidate.usernameFragment : undefined });
+            }
+            next.updatedAt = Date.now();
+            room[key] = next;
+            return send(200, stateFor(room));
+          }
           if (body.action === 'read') {
             const current = stateFor(room);
             if (body.version && body.version === current.version) return send(200, { unchanged: true, version: current.version });

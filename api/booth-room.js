@@ -14,6 +14,7 @@ function respond(res, status, body) {
 
 function roomPath(code) { return `little-archive/booths/${code}/room.json`; }
 function personPath(code, role) { return `little-archive/booths/${code}/${role}.json`; }
+function signalPath(code, role) { return `little-archive/booths/${code}/${role}-signal.json`; }
 
 async function readJson(pathname) {
   let blob;
@@ -74,11 +75,13 @@ function publicRoom(room) {
 async function readRoomState(code) {
   const room = await readJson(roomPath(code));
   if (!room || room.expiresAt <= Date.now()) return null;
-  const [host, guest] = await Promise.all([
+  const [host, guest, hostSignal, guestSignal] = await Promise.all([
     readJson(personPath(code, 'host')),
     readJson(personPath(code, 'guest')),
+    readJson(signalPath(code, 'host')),
+    readJson(signalPath(code, 'guest')),
   ]);
-  return { room, host, guest };
+  return { room, host, guest, hostSignal, guestSignal };
 }
 
 function requireLiveRoom(state) {
@@ -103,7 +106,9 @@ function responseState(state) {
     room: publicRoom(state.room),
     host: state.host,
     guest: state.guest,
-    version: `${state.room.sessionId || ''}:${state.host?.lastSeenAt || 0}:${state.host?.ready ? 1 : 0}:${state.host?.left ? 1 : 0}:${state.host?.photos?.length || 0}:${state.guest?.lastSeenAt || 0}:${state.guest?.ready ? 1 : 0}:${state.guest?.left ? 1 : 0}:${state.guest?.photos?.length || 0}`,
+    hostSignal: state.hostSignal || null,
+    guestSignal: state.guestSignal || null,
+    version: `${state.room.sessionId || ''}:${state.host?.lastSeenAt || 0}:${state.host?.ready ? 1 : 0}:${state.host?.left ? 1 : 0}:${state.host?.photos?.length || 0}:${state.guest?.lastSeenAt || 0}:${state.guest?.ready ? 1 : 0}:${state.guest?.left ? 1 : 0}:${state.guest?.photos?.length || 0}:${state.hostSignal?.updatedAt || 0}:${state.guestSignal?.updatedAt || 0}`,
   };
 }
 
@@ -135,7 +140,7 @@ export default async function handler(req, res) {
           await writeJson(roomPath(code), room, false);
           const host = { id: participantId, name: String(body.name || 'Host').slice(0, 24), photos: [], ready: false, left: false, lastSeenAt: now };
           await writeJson(personPath(code, 'host'), host, false);
-          return respond(res, 200, responseState({ room, host, guest: null }));
+          return respond(res, 200, responseState({ room, host, guest: null, hostSignal: null, guestSignal: null }));
         } catch (error) {
           if (attempt === 4) throw error;
         }
@@ -194,7 +199,37 @@ export default async function handler(req, res) {
         writeJson(personPath(code, 'guest'), guest),
         writeJson(roomPath(code), room),
       ]);
-      return respond(res, 200, responseState({ room, host, guest }));
+      return respond(res, 200, responseState({ ...state, room, host, guest }));
+    }
+
+    if (action === 'signal') {
+      const key = role === 'host' ? 'hostSignal' : 'guestSignal';
+      const current = state[key] || { description: null, candidates: [], updatedAt: 0 };
+      const next = { ...current, candidates: [...(current.candidates || [])] };
+      if (body.description) {
+        const expectedType = role === 'host' ? 'offer' : 'answer';
+        if (body.description.type !== expectedType || typeof body.description.sdp !== 'string' || body.description.sdp.length > 20_000) {
+          return respond(res, 400, { error: 'The live camera connection could not be prepared.' });
+        }
+        next.description = { type: expectedType, sdp: body.description.sdp };
+      }
+      if (body.candidate) {
+        const candidate = body.candidate;
+        if (typeof candidate.candidate !== 'string' || candidate.candidate.length > 4_000 || next.candidates.length >= 64) {
+          return respond(res, 400, { error: 'The live camera connection sent an invalid network route.' });
+        }
+        if (!next.candidates.some(item => item.candidate === candidate.candidate)) {
+          next.candidates.push({
+            candidate: candidate.candidate,
+            sdpMid: typeof candidate.sdpMid === 'string' ? candidate.sdpMid : null,
+            sdpMLineIndex: Number.isInteger(candidate.sdpMLineIndex) ? candidate.sdpMLineIndex : null,
+            usernameFragment: typeof candidate.usernameFragment === 'string' ? candidate.usernameFragment : undefined,
+          });
+        }
+      }
+      next.updatedAt = Date.now();
+      await writeJson(signalPath(code, role), next);
+      return respond(res, 200, responseState({ ...state, [key]: next }));
     }
 
     if (action === 'update' || action === 'ping') {
