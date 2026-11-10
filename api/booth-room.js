@@ -17,15 +17,20 @@ function personPath(code, role) { return `little-archive/booths/${code}/${role}.
 function signalPath(code, role) { return `little-archive/booths/${code}/${role}-signal.json`; }
 
 async function readJson(pathname) {
-  let blob;
-  try {
-    blob = await get(pathname, { access: 'private', useCache: false });
-  } catch (error) {
-    if (error instanceof BlobNotFoundError) return null;
-    throw error;
+  let lastError;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      const blob = await get(pathname, { access: 'private', useCache: false });
+      if (!blob || blob.statusCode === 404) return null;
+      if (blob.statusCode !== 200 || !blob.stream) throw new Error(`Vercel Blob returned ${blob.statusCode || 'an empty response'} while reading ${pathname}.`);
+      return JSON.parse(await new Response(blob.stream).text());
+    } catch (error) {
+      if (error instanceof BlobNotFoundError || error?.name === 'BlobNotFoundError' || error?.statusCode === 404) return null;
+      lastError = error;
+      if (attempt < 2) await new Promise(resolve => setTimeout(resolve, 150 * (attempt + 1)));
+    }
   }
-  if (!blob || blob.statusCode !== 200 || !blob.stream) return null;
-  return JSON.parse(await new Response(blob.stream).text());
+  throw lastError;
 }
 
 async function writeJson(pathname, value, allowOverwrite = true) {
@@ -140,6 +145,10 @@ export default async function handler(req, res) {
           await writeJson(roomPath(code), room, false);
           const host = { id: participantId, name: String(body.name || 'Host').slice(0, 24), photos: [], ready: false, left: false, lastSeenAt: now };
           await writeJson(personPath(code, 'host'), host, false);
+          await Promise.all([
+            writeJson(signalPath(code, 'host'), { description: null, candidates: [], updatedAt: now }, false),
+            writeJson(signalPath(code, 'guest'), { description: null, candidates: [], updatedAt: now }, false),
+          ]);
           return respond(res, 200, responseState({ room, host, guest: null, hostSignal: null, guestSignal: null }));
         } catch (error) {
           if (attempt === 4) throw error;
