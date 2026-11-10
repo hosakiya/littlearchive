@@ -330,3 +330,18 @@ img,video,canvas{max-width:100%}
 
 /* Use Hillos for titles and heading-like labels only. */
 h1,h2,h3,h4,h5,h6,.brand,.strip-top,.mini-mark,.mini-cap,.style-card strong,.steps b,.gallery-choice b,.selected-style b,.tiny-preview,.design-option-copy b,.preview-heading,.polaroid-shot small,.empty-memory h2,.about-card h1,.privacy-document h1,.privacy-document h2,.sticker-category-toggle>span:first-child,.slotted-brand,.template-brand{font-family:'Hillos',sans-serif!important}
+
+/* A tiny rose cursor and soft scrollbar accents to match the archive palette. */
+body{cursor:url('/cursors/little-pointer.svg') 3 2,auto}
+button,a,[role="button"],select{cursor:url('/cursors/little-pointer.svg') 3 2,pointer}
+input,textarea,[contenteditable="true"]{cursor:text}
+html{scrollbar-color:#c77f8d #f1ebe5;scrollbar-width:thin}
+*{scrollbar-color:#c77f8d #f1ebe5;scrollbar-width:thin}
+::-webkit-scrollbar{width:12px;height:12px}
+::-webkit-scrollbar-track{background:#f1ebe5;border-radius:999px}
+::-webkit-scrollbar-thumb{min-height:36px;background:linear-gradient(180deg,#dfa0aa,#bd7381);border:3px solid #f1ebe5;border-radius:999px}
+::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,#d48c9b,#aa6575)}
+.night-mode, .night-mode *{scrollbar-color:#a96477 #2f2934}
+.night-mode ::-webkit-scrollbar-track{background:#2f2934}
+.night-mode ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#d18b9a,#935a70);border-color:#2f2934}
+@media(hover:none),(pointer:coarse){body,button,a,[role="button"],select{cursor:auto}}
