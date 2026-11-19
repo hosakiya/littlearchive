@@ -480,6 +480,23 @@ body{background-color:#eee7dd;background-image:radial-gradient(#9b7a6510 .7px,tr
   .booth-page .shared-waiting-message span{font-size:11px}
 }
 
+/* Flowing section waves keep the page feeling like layered cut-paper. */
+.hero{overflow:visible;margin-bottom:24px;z-index:1}
+.hero:after,.styles-section:after,.how:after{pointer-events:none}
+.hero:after{position:absolute;z-index:3;left:0;right:0;bottom:-24px;height:32px;content:"";background-repeat:no-repeat;background-size:100% 100%;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath fill='%23fffaf3' d='M0 26 C120 65 225 65 360 30 S600 0 720 30 S960 67 1080 32 S1320 0 1440 28 V80 H0Z'/%3E%3C/svg%3E")}
+.styles-section{margin-bottom:24px;overflow:visible;z-index:1}
+.styles-section:after{position:absolute;z-index:2;left:0;right:0;bottom:-24px;height:34px;content:"";background-repeat:no-repeat;background-size:100% 100%;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath fill='%23f5e6c7' d='M0 30 C120 0 240 0 360 32 S600 65 720 30 S960 0 1080 32 S1320 66 1440 28 V80 H0Z'/%3E%3C/svg%3E")}
+.how{padding-top:112px}
+.how:after{animation:wave-float 7s ease-in-out infinite alternate}
+.hero-copy:before{animation:shape-float 8s ease-in-out infinite alternate}
+.hero-copy:after{animation:shape-float 6s ease-in-out -2s infinite alternate-reverse}
+.hero-art:after{animation:shape-float 7s ease-in-out -1s infinite alternate}
+@keyframes shape-float{from{translate:0 0}to{translate:0 -9px}}
+@keyframes wave-float{from{translate:0 0}to{translate:0 -5px}}
+.night-mode .hero:after{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath fill='%2325222a' d='M0 26 C120 65 225 65 360 30 S600 0 720 30 S960 67 1080 32 S1320 0 1440 28 V80 H0Z'/%3E%3C/svg%3E")}
+.night-mode .styles-section:after{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath fill='%23302d31' d='M0 30 C120 0 240 0 360 32 S600 65 720 30 S960 0 1080 32 S1320 66 1440 28 V80 H0Z'/%3E%3C/svg%3E")}
+@media(prefers-reduced-motion:reduce){.hero-copy:before,.hero-copy:after,.hero-art:after,.how:after{animation:none}}
+
 /* Warm bakery inspired palette with rounded, airy scrapbook surfaces. */
 :root{color:#542b29;background:#fff6e8}
 body,.app-shell{background:#fff6e8}
