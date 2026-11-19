@@ -497,6 +497,30 @@ body{background-color:#eee7dd;background-image:radial-gradient(#9b7a6510 .7px,tr
 .night-mode .styles-section:after{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath fill='%23302d31' d='M0 30 C120 0 240 0 360 32 S600 65 720 30 S960 0 1080 32 S1320 66 1440 28 V80 H0Z'/%3E%3C/svg%3E")}
 @media(prefers-reduced-motion:reduce){.hero-copy:before,.hero-copy:after,.hero-art:after,.how:after{animation:none}}
 
+/* A more balanced hero collage and gentle motion throughout the page. */
+.hero-art{isolation:isolate;min-height:420px}
+.hero-art:before{inset:36px 0 18px 20px;border-radius:48% 52% 37% 63% / 42% 38% 62% 58%;background:radial-gradient(circle at 20% 24%,#f8ad9c 0 10%,transparent 10.5%),radial-gradient(circle at 82% 68%,#ee8178 0 14%,transparent 14.5%),radial-gradient(circle at 68% 20%,#d85b63 0 8%,transparent 8.5%),linear-gradient(145deg,#b83e49,#922432);box-shadow:0 20px 42px #86283122}
+.main-strip{top:28px;left:39%;width:clamp(176px,18vw,204px);animation:paper-hover 6.5s ease-in-out infinite}
+.back-card{top:128px;left:4%;width:clamp(168px,17vw,194px);animation:paper-hover 7.2s ease-in-out -1.5s infinite reverse}
+.tape{z-index:3}
+.spark.s1{z-index:3;top:9%;right:8%;animation:twinkle 3.8s ease-in-out infinite}
+.spark.s2{z-index:3;animation:twinkle 4.4s ease-in-out -1s infinite reverse}
+.style-card,.gallery-choice,.room-layout-grid button,.room-active-actions button,.download-options button,.primary,.capture,.sound,.text-link{transition:transform .24s ease,box-shadow .24s ease,background-color .24s ease,border-color .24s ease}
+.style-card:hover,.gallery-choice:hover,.room-layout-grid button:hover{transform:translateY(-5px) rotate(-.5deg)}
+.primary:hover,.capture:not(:disabled):hover,.room-active-actions button:hover,.download-options button:hover{transform:translateY(-2px)}
+.style-card:active,.gallery-choice:active,.primary:active,.capture:active{transform:scale(.985)}
+.motion-reveal{opacity:0;translate:0 20px;filter:blur(4px);transition:opacity .65s cubic-bezier(.2,.75,.25,1),translate .65s cubic-bezier(.2,.75,.25,1),filter .65s ease;transition-delay:calc(var(--reveal-order,0)*65ms)}
+.motion-reveal.is-in-view{opacity:1;translate:0 0;filter:blur(0)}
+@keyframes paper-hover{0%,100%{translate:0 0}50%{translate:0 -8px}}
+@keyframes twinkle{0%,100%{scale:1;opacity:.78}50%{scale:1.18;opacity:1}}
+@media(max-width:900px){.main-strip{left:40%;width:clamp(170px,23vw,195px)}.back-card{left:3%;width:clamp(160px,22vw,180px)}}
+@media(max-width:620px){.hero-art{min-height:clamp(290px,88vw,390px)}.hero-art:before{inset:24px 0 24px 10px}.main-strip{top:18px;left:40%;width:clamp(158px,43vw,190px)}.back-card{top:25%;left:2%;width:clamp(148px,40vw,174px)}}
+@media(prefers-reduced-motion:reduce){
+  .motion-reveal,.motion-reveal.is-in-view{opacity:1;translate:none;filter:none;transition:none}
+  .main-strip,.back-card,.spark.s1,.spark.s2{animation:none}
+  .style-card,.gallery-choice,.room-layout-grid button,.room-active-actions button,.download-options button,.primary,.capture,.sound,.text-link{transition:none}
+}
+
 /* Warm bakery inspired palette with rounded, airy scrapbook surfaces. */
 :root{color:#542b29;background:#fff6e8}
 body,.app-shell{background:#fff6e8}
