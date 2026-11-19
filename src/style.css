@@ -520,3 +520,39 @@ footer{background:#fffaf3;border-color:#efdfd2;color:#93695f}
 .night-mode{background:#211f27;color:#f1e9e7}
 .night-mode .hero-art:before{background:radial-gradient(circle at 18% 22%,#965461 0 8%,transparent 8.5%),radial-gradient(circle at 84% 75%,#71333f 0 12%,transparent 12.5%),linear-gradient(145deg,#542e3b,#30232f)}
 .night-mode .topbar,.night-mode .intro-row,.night-mode footer{background:#211f27}
+
+/* Playful rounded shapes inspired by hand-cut paper and gelato shop awnings. */
+.hero-copy{position:relative;isolation:isolate}
+.hero-copy:before,.hero-copy:after{position:absolute;z-index:-1;content:"";pointer-events:none;border-radius:50%}
+.hero-copy:before{width:76px;height:76px;right:3%;top:5%;background:#f5d991;opacity:.62}
+.hero-copy:after{width:34px;height:34px;right:12%;bottom:5%;background:#dce4b6;box-shadow:-44px -18px 0 -9px #edb4bd,30px -50px 0 -11px #efb89d}
+.hero-art:after{position:absolute;z-index:0;right:2%;top:22%;width:86px;height:86px;border-radius:48% 52% 58% 42%;content:"";background:#f1a2ad;opacity:.7;transform:rotate(19deg);pointer-events:none}
+.back-card{z-index:1}
+.main-strip,.back-card{border-radius:5px 5px 14px 14px}
+.styles-section{position:relative;background:#dfe5ba}
+.styles-section:before{position:absolute;top:-18px;left:0;right:0;height:20px;content:"";background:radial-gradient(circle at 20px 20px,#dfe5ba 19px,transparent 19.5px) 0 0/40px 40px repeat-x;pointer-events:none}
+.style-card:nth-child(4n+1) .mini-strip{background-color:#f8d8d7}
+.style-card:nth-child(4n+2) .mini-strip{background-color:#f5e5bc}
+.style-card:nth-child(4n+3) .mini-strip{background-color:#d6e2b3}
+.style-card:nth-child(4n) .mini-strip{background-color:#e9d5e1}
+.how{position:relative;overflow:hidden;background:#f5e6c7}
+.how:before,.how:after{position:absolute;content:"";width:150px;height:118px;border-radius:55% 45% 67% 33%;background:#f1b5bb;opacity:.42;pointer-events:none}
+.how:before{left:-58px;top:26px;transform:rotate(24deg)}
+.how:after{right:-54px;bottom:32px;background:#dce4b6;transform:rotate(-28deg)}
+.steps,.how>.eyebrow,.how>h2,.how>.primary{position:relative;z-index:1}
+.room-page-heading{position:relative}
+.room-page-heading:after{position:absolute;right:5%;top:0;width:44px;height:44px;content:"";border-radius:50% 50% 50% 8%;background:#f2d995;opacity:.72;transform:rotate(24deg)}
+.room-step-number{border-radius:40% 60% 52% 48%}
+.room-live-feed{border-radius:15px 15px 7px 7px}
+.night-mode .styles-section{background:#2a2e2d}
+.night-mode .styles-section:before{background:radial-gradient(circle at 20px 20px,#2a2e2d 19px,transparent 19.5px) 0 0/40px 40px repeat-x}
+.night-mode .how{background:#302d31}
+.night-mode .how:before,.night-mode .how:after{opacity:.14}
+.night-mode .hero-copy:before{opacity:.15}
+.night-mode .room-page-heading:after{opacity:.2}
+@media(max-width:620px){
+  .hero-copy:before{width:54px;height:54px;right:2%;top:-4%}
+  .hero-copy:after{right:7%;bottom:0}
+  .hero-art:after{width:56px;height:56px;right:0;top:19%}
+  .room-page-heading:after{width:30px;height:30px;right:1%;top:12%}
+}
