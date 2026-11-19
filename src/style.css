@@ -479,3 +479,44 @@ body{background-color:#eee7dd;background-image:radial-gradient(#9b7a6510 .7px,tr
   .booth-page .shared-waiting-message strong{font-size:20px}
   .booth-page .shared-waiting-message span{font-size:11px}
 }
+
+/* Warm bakery inspired palette with rounded, airy scrapbook surfaces. */
+:root{color:#542b29;background:#fff6e8}
+body,.app-shell{background:#fff6e8}
+.topbar{background:#fffaf3;border-color:#f0dfd0;box-shadow:0 3px 18px #6b34200c}
+.topbar nav button,.sound{color:#71423d}
+.topbar nav button:hover,.text-link:hover{color:#a83237}
+.memory-dot{color:#b63b41}
+.sound{border-color:#ead7c8;background:#fffaf5}
+.hero{position:relative;gap:clamp(24px,5vw,72px);padding-top:clamp(58px,7vw,96px);padding-bottom:clamp(55px,7vw,92px)}
+.hero-art:before{position:absolute;inset:14px -18px 12px 4px;content:"";border-radius:32px;background:radial-gradient(circle at 18% 22%,#f6a394 0 8%,transparent 8.5%),radial-gradient(circle at 84% 75%,#f17e72 0 12%,transparent 12.5%),linear-gradient(145deg,#bc454a,#941f2c);box-shadow:0 16px 35px #86283125}
+.hero h1 em,.section-heading h2 em,.how h2 em,.page-title h1 em,.booth-heading h1 em,.finished h1 em,.memories-page>h1 em{color:#aa3037}
+.eyebrow{color:#9b5c51}
+.primary,.capture{background:#a92f37;border-radius:999px;box-shadow:0 7px 18px #9a30331c}
+.primary:hover,.download-btn:hover{background:#87232c}
+.text-link{color:#86534b}
+.intro-row{background:#fffaf3;border-color:#efdfd2;color:#94665d}
+.styles-section{background:#f8e8dc}
+.style-card{padding:12px 12px 16px;border-radius:20px;background:#fffaf4;box-shadow:0 8px 24px #7c3a2310;transition:transform .22s,box-shadow .22s}
+.style-card:hover{transform:translateY(-4px);box-shadow:0 14px 28px #7c3a2318}
+.style-card .mini-strip{border-radius:14px;overflow:hidden;box-shadow:none}
+.gallery-choice{border-radius:18px;background:#fffaf4;box-shadow:0 5px 18px #723b2410}
+.gallery-choice:hover{border-color:#edb7a4;background:#fffdf8}
+.gallery-choice.chosen{border-color:#c8645d;background:#fff0e8;box-shadow:0 7px 20px #a5433918}
+.booth-controls,.live-filter-control,.post-filter-control,.room-book,.edit-details,.empty-memory{border:1px solid #efdfd2;border-radius:20px;box-shadow:0 10px 28px #723b240d}
+.camera-frame{border-radius:22px;box-shadow:0 15px 34px #542b291f}
+.room-book{background:#fffaf4;border-color:#eedbcb;box-shadow:0 12px 32px #773a2512}
+.room-book:before{border-radius:4px;background:#e9bd9b99}
+.room-active-card{border-radius:18px;background:#fffaf3;border-color:#eed9c6;box-shadow:3px 5px 0 #e5cdb7}
+.room-active-card:before{border-radius:3px;background:#dfb694aa}
+.room-tabs{border-radius:999px;background:#f7e8dc}
+.room-tabs button{border-radius:999px}
+.room-tabs button.active{background:#a83239;color:#fff}
+.room-layout-grid button,.room-active-actions button,.download-options button{border-radius:12px}
+.filter-list button,.design-option,.image-stickers button{border-radius:10px}
+.filter-list button.active,.night-mode .design-option.active,.night-mode .filter-list button.active{background:#a83239;border-color:#a83239}
+.download-options button:hover,.room-active-actions button:hover{border-color:#c45b55;background:#fff0e7}
+footer{background:#fffaf3;border-color:#efdfd2;color:#93695f}
+.night-mode{background:#211f27;color:#f1e9e7}
+.night-mode .hero-art:before{background:radial-gradient(circle at 18% 22%,#965461 0 8%,transparent 8.5%),radial-gradient(circle at 84% 75%,#71333f 0 12%,transparent 12.5%),linear-gradient(145deg,#542e3b,#30232f)}
+.night-mode .topbar,.night-mode .intro-row,.night-mode footer{background:#211f27}
