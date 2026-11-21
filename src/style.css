@@ -685,3 +685,9 @@ footer{background:#fffaf3;border-color:#efdfd2;color:#93695f}
 .hero-dot-three{width:19px;height:19px;left:9%;bottom:10%;background:#dce4b6}
 .hero-dot-four{width:10px;height:10px;right:13%;bottom:-3%;background:#eab8c1}
 @media(max-width:620px){.hero h1{font-size:clamp(58px,15vw,78px)}.hero-actions .primary{width:100%;max-width:360px;padding:17px 22px;font-size:13px}.hero-actions .text-link{font-size:12px}.hero-dot-one{left:-3%;top:11%}.hero-dot-two{right:-2%;top:44%}.hero-dot-three{left:5%;bottom:7%}.hero-dot-four{right:8%;bottom:-2%}}
+.hero-dot{animation:bubble-drift 4.8s ease-in-out infinite;will-change:transform}
+.hero-dot-two{animation-duration:5.7s;animation-delay:-1.4s}
+.hero-dot-three{animation-duration:4.2s;animation-delay:-2.2s}
+.hero-dot-four{animation-duration:5.2s;animation-delay:-.8s}
+@keyframes bubble-drift{0%,100%{transform:translate3d(0,0,0) scale(1)}35%{transform:translate3d(5px,-12px,0) scale(1.1)}68%{transform:translate3d(-3px,-5px,0) scale(.96)}}
+@media(prefers-reduced-motion:reduce){.hero-dot{animation:none;will-change:auto}}
