@@ -691,3 +691,25 @@ footer{background:#fffaf3;border-color:#efdfd2;color:#93695f}
 .hero-dot-four{animation-duration:5.2s;animation-delay:-.8s}
 @keyframes bubble-drift{0%,100%{transform:translate3d(0,0,0) scale(1)}35%{transform:translate3d(5px,-12px,0) scale(1.1)}68%{transform:translate3d(-3px,-5px,0) scale(.96)}}
 @media(prefers-reduced-motion:reduce){.hero-dot{animation:none;will-change:auto}}
+.hero-dot-five{width:9px;height:9px;left:16%;top:-8%;background:#efb6a8}
+.hero-dot-six{width:14px;height:14px;right:23%;top:-12%;background:#f0d89e}
+.hero-dot-seven{width:12px;height:12px;left:-11%;top:52%;background:#e9b9c3}
+.hero-dot-eight{width:8px;height:8px;right:-12%;top:68%;background:#dce4b6}
+.hero-dot-nine{width:15px;height:15px;left:24%;bottom:-12%;background:#f1c9a7}
+.hero-dot-ten{width:10px;height:10px;right:25%;bottom:-17%;background:#edb5bf}
+.hero-dot-two{--bubble-duration:5.7s;--bubble-delay:-1.4s}
+.hero-dot-three{--bubble-duration:4.2s;--bubble-delay:-2.2s}
+.hero-dot-four{--bubble-duration:5.2s;--bubble-delay:-.8s}
+.hero-dot-five{--bubble-duration:4.6s;--bubble-delay:-1.8s}
+.hero-dot-six{--bubble-duration:5.4s;--bubble-delay:-.5s}
+.hero-dot-seven{--bubble-duration:4.1s;--bubble-delay:-2.6s}
+.hero-dot-eight{--bubble-duration:5.9s;--bubble-delay:-1.1s}
+.hero-dot-nine{--bubble-duration:4.9s;--bubble-delay:-3s}
+.hero-dot-ten{--bubble-duration:5.3s;--bubble-delay:-2s}
+.hero-dot{animation:bubble-drift var(--bubble-duration,4.8s) ease-in-out infinite var(--bubble-delay,0s)}
+@supports (animation-timeline:scroll(root block)){
+  .hero-dot{animation:bubble-drift var(--bubble-duration,4.8s) ease-in-out infinite var(--bubble-delay,0s),bubble-scroll-rise 1s linear both;animation-timeline:auto,scroll(root block);animation-range:normal,0 100vh}
+}
+@keyframes bubble-scroll-rise{from{translate:0 0}to{translate:0 -115px}}
+@media(max-width:620px){.hero-dot-five{left:10%;top:-5%}.hero-dot-six{right:14%;top:-8%}.hero-dot-seven{left:-4%;top:50%}.hero-dot-eight{right:-4%;top:63%}.hero-dot-nine{left:19%;bottom:-7%}.hero-dot-ten{right:18%;bottom:-9%}}
+@media(prefers-reduced-motion:reduce){.hero-dot{animation:none;translate:none;will-change:auto}}
