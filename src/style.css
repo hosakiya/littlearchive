@@ -636,7 +636,7 @@ footer{background:#fffaf3;border-color:#efdfd2;color:#93695f}
 .scene-orbit{position:absolute;z-index:0;border-radius:50%;pointer-events:none}
 .scene-orbit-one{width:clamp(180px,23vw,270px);height:clamp(180px,23vw,270px);right:9%;top:17%;background:#df98a2;opacity:.7}
 .scene-orbit-two{width:clamp(112px,15vw,172px);height:clamp(112px,15vw,172px);right:20%;top:28%;background:#f1c4c6;opacity:.72;box-shadow:0 0 0 12px #fff4}
-.hero-wave{position:absolute;z-index:3;left:0;right:0;bottom:12px;height:42px;background:#dfe5ba;clip-path:polygon(0 42%,8% 40%,15% 72%,24% 74%,33% 47%,42% 45%,50% 68%,60% 67%,70% 40%,79% 42%,88% 72%,100% 38%,100% 100%,0 100%);pointer-events:none}
+
 .hero-polaroid{z-index:2;top:18px;left:40%;width:clamp(214px,24vw,272px);padding:22px 19px 24px;transform:rotate(5deg);border-radius:4px 4px 16px 16px;box-shadow:0 19px 36px #673d4733;animation:paper-hover 6.5s ease-in-out infinite}
 .hero-polaroid .strip-top{font-size:13px;padding-bottom:12px}
 .hero-polaroid-photo{height:clamp(224px,29vw,330px);margin:0;background:#efb9c9}
@@ -646,9 +646,9 @@ footer{background:#fffaf3;border-color:#efdfd2;color:#93695f}
 .scrapbook-scene .back-card .fake-photo{height:clamp(170px,20vw,230px)}
 .scene-note{position:absolute;z-index:4;right:2%;bottom:69px;color:#7f554f;font:11px 'Homemade Apple',cursive;line-height:1.5;transform:rotate(-7deg)}
 .night-mode .scrapbook-scene:before{background:radial-gradient(ellipse at 78% 15%,#a07d83 0 25%,transparent 25.5%),radial-gradient(ellipse at 80% 54%,#97747a 0 35%,transparent 35.5%),linear-gradient(115deg,#37313a 0 21%,#493440 21% 100%)}
-.night-mode .scene-orbit-one{background:#97747a}.night-mode .scene-orbit-two{background:#ad858b}.night-mode .hero-wave{background:#4b5547}.night-mode .scene-note{color:#e9c8d4}
+.night-mode .scene-orbit-one{background:#97747a}.night-mode .scene-orbit-two{background:#ad858b}.night-mode .night-mode .scene-note{color:#e9c8d4}
 @media(max-width:900px){.scrapbook-scene .hero-polaroid{left:39%;width:clamp(210px,31vw,258px)}.scrapbook-scene .back-card{left:3%}}
-@media(max-width:620px){.scrapbook-scene{min-height:clamp(310px,96vw,390px)}.scrapbook-scene:before{inset:22px 0 34px 2%}.scrapbook-scene .hero-polaroid{top:4px;left:37%;width:clamp(190px,51vw,230px);padding:17px 15px 19px}.hero-polaroid-photo{height:clamp(196px,55vw,250px)}.scrapbook-scene .back-card{top:24%;left:0;width:clamp(145px,39vw,174px);padding:10px 10px 16px}.scrapbook-scene .back-card .fake-photo{height:clamp(144px,40vw,182px)}.scene-orbit-one{right:0;top:18%;width:47vw;height:47vw}.scene-orbit-two{right:11%;top:29%;width:29vw;height:29vw}.scrapbook-scene:after{width:58px;height:58px;right:0;top:12%;box-shadow:0 0 0 10px #e6afb555}.scene-note{right:0;bottom:48px;font-size:9px}.hero-wave{height:30px;bottom:4px}}
+@media(max-width:620px){.scrapbook-scene{min-height:clamp(310px,96vw,390px)}.scrapbook-scene:before{inset:22px 0 34px 2%}.scrapbook-scene .hero-polaroid{top:4px;left:37%;width:clamp(190px,51vw,230px);padding:17px 15px 19px}.hero-polaroid-photo{height:clamp(196px,55vw,250px)}.scrapbook-scene .back-card{top:24%;left:0;width:clamp(145px,39vw,174px);padding:10px 10px 16px}.scrapbook-scene .back-card .fake-photo{height:clamp(144px,40vw,182px)}.scene-orbit-one{right:0;top:18%;width:47vw;height:47vw}.scene-orbit-two{right:11%;top:29%;width:29vw;height:29vw}.scrapbook-scene:after{width:58px;height:58px;right:0;top:12%;box-shadow:0 0 0 10px #e6afb555}.scene-note{right:0;bottom:48px;font-size:9px}}
 @media(prefers-reduced-motion:reduce){.hero-polaroid{animation:none}}
 
 
@@ -660,12 +660,12 @@ footer{background:#fffaf3;border-color:#efdfd2;color:#93695f}
 .scrapbook-scene:before{inset:34px 1% 30px 3%;border-radius:48% 52% 38% 32% / 32% 33% 35% 40%;background:radial-gradient(circle at 83% 32%,#f2bec4 0 19%,transparent 19.5%),radial-gradient(circle at 77% 61%,#e9aeb7 0 28%,transparent 28.5%),#f7dfe0;box-shadow:none}
 .scene-orbit-one{width:clamp(170px,21vw,238px);height:clamp(170px,21vw,238px);right:12%;top:18%;background:#e7aab2;opacity:.68}
 .scene-orbit-two{width:clamp(104px,13vw,148px);height:clamp(104px,13vw,148px);right:23%;top:31%;background:#f4c8cb;opacity:.8;box-shadow:0 0 0 10px #fff5}
-.hero-wave{z-index:0;bottom:3px;height:28px;border-radius:48% 52% 0 0 / 80% 75% 0 0;clip-path:none;background:#e4e8c9}
+
 .hero-polaroid{top:24px;width:clamp(205px,22vw,248px);padding:19px 17px 20px}
 .hero-polaroid-photo{height:clamp(225px,27vw,292px)}
 .scrapbook-scene .back-card{top:128px;width:clamp(158px,17vw,188px)}
 .scrapbook-scene .back-card .fake-photo{height:clamp(168px,19vw,208px)}
 @media(max-width:900px){.scrapbook-scene{min-height:480px}.scrapbook-scene .hero-polaroid{left:41%;width:clamp(205px,29vw,244px)}}
-@media(max-width:620px){.scrapbook-scene{min-height:clamp(350px,100vw,420px)}.scrapbook-scene:before{inset:24px 0 25px 1%}.scrapbook-scene .hero-polaroid{top:7px;left:39%;width:clamp(184px,48vw,218px);padding:15px 13px 17px}.hero-polaroid-photo{height:clamp(196px,51vw,234px)}.scrapbook-scene .back-card{top:25%;left:0;width:clamp(140px,36vw,165px);padding:9px 9px 14px}.scrapbook-scene .back-card .fake-photo{height:clamp(142px,38vw,172px)}.scene-orbit-one{right:3%;top:19%;width:45vw;height:45vw}.scene-orbit-two{right:15%;top:30%;width:28vw;height:28vw}.scrapbook-scene:after{width:50px;height:50px;right:1%;top:12%;box-shadow:0 0 0 8px #e6afb555}.hero-wave{height:23px;bottom:1px}}.night-mode .room-tabs button.active,.night-mode .filter-list button.active,.night-mode .ar-filter-list button.active,.night-mode .design-option.active,.night-mode .room-layout-grid button.selected{background:#d4a0a4;border-color:#d4a0a4;color:#342a2b}
+@media(max-width:620px){.scrapbook-scene{min-height:clamp(350px,100vw,420px)}.scrapbook-scene:before{inset:24px 0 25px 1%}.scrapbook-scene .hero-polaroid{top:7px;left:39%;width:clamp(184px,48vw,218px);padding:15px 13px 17px}.hero-polaroid-photo{height:clamp(196px,51vw,234px)}.scrapbook-scene .back-card{top:25%;left:0;width:clamp(140px,36vw,165px);padding:9px 9px 14px}.scrapbook-scene .back-card .fake-photo{height:clamp(142px,38vw,172px)}.scene-orbit-one{right:3%;top:19%;width:45vw;height:45vw}.scene-orbit-two{right:15%;top:30%;width:28vw;height:28vw}.scrapbook-scene:after{width:50px;height:50px;right:1%;top:12%;box-shadow:0 0 0 8px #e6afb555}}.night-mode .room-tabs button.active,.night-mode .filter-list button.active,.night-mode .ar-filter-list button.active,.night-mode .design-option.active,.night-mode .room-layout-grid button.selected{background:#d4a0a4;border-color:#d4a0a4;color:#342a2b}
 .night-mode .scrapbook-scene:before{background:radial-gradient(circle at 83% 32%,#a98186 0 19%,transparent 19.5%),radial-gradient(circle at 77% 61%,#8c6870 0 28%,transparent 28.5%),#46383a}
 .night-mode .scene-orbit-one{background:#9b757c}.night-mode .scene-orbit-two{background:#b08a8d}
