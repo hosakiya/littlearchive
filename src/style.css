@@ -676,3 +676,12 @@ footer{background:#fffaf3;border-color:#efdfd2;color:#93695f}
 .hero-text{margin-inline:auto}
 .hero-actions{justify-content:center}
 @media(max-width:620px){.hero{min-height:500px;padding:72px 7% 64px}.hero h1{font-size:clamp(54px,14vw,72px)}.hero-actions{flex-wrap:wrap;gap:12px}}
+.hero h1{font-size:clamp(64px,7vw,100px);line-height:.98}
+.hero-actions .primary{padding:18px 28px;font-size:14px}
+.hero-actions .text-link{font-size:13px;padding:10px 2px}
+.hero-dot{position:absolute;z-index:-1;display:block;border-radius:50%;pointer-events:none}
+.hero-dot-one{width:13px;height:13px;left:-5%;top:22%;background:#efb9a5}
+.hero-dot-two{width:11px;height:11px;right:-6%;top:47%;background:#e8c99a}
+.hero-dot-three{width:19px;height:19px;left:9%;bottom:10%;background:#dce4b6}
+.hero-dot-four{width:10px;height:10px;right:13%;bottom:-3%;background:#eab8c1}
+@media(max-width:620px){.hero h1{font-size:clamp(58px,15vw,78px)}.hero-actions .primary{width:100%;max-width:360px;padding:17px 22px;font-size:13px}.hero-actions .text-link{font-size:12px}.hero-dot-one{left:-3%;top:11%}.hero-dot-two{right:-2%;top:44%}.hero-dot-three{left:5%;bottom:7%}.hero-dot-four{right:8%;bottom:-2%}}
